@@ -1,3 +1,7 @@
+lillydoo:
+    resource: "@LillydooBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation

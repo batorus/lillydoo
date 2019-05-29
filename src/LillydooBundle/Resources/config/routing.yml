@@ -1,0 +1,3 @@
+lillydoo_homepage:
+    path:     /
+    defaults: { _controller: LillydooBundle:Default:index }
