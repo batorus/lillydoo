@@ -24,42 +24,42 @@ class Addressbook
     /**
      * @var string|null
      *
-     * @ORM\Column(name="firstname", type="string", length=50, nullable=true)
+     * @ORM\Column(name="firstname", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="lastname", type="string", length=50, nullable=true)
+     * @ORM\Column(name="lastname", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $lastname;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="street", type="string", length=50)
+     * @ORM\Column(name="street", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $street;
 
     /**
-     * @var int|null
+     * @var int
      *
-     * @ORM\Column(name="number", type="integer", nullable=true)
+     * @ORM\Column(name="number", type="integer")
      */
     private $number;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="country", type="string", length=50, nullable=true)
+     * @ORM\Column(name="country", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $country;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="phonenumber", type="string", length=50, nullable=true)
+     * @ORM\Column(name="phonenumber", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $phonenumber;
 
@@ -73,14 +73,14 @@ class Addressbook
     /**
      * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=50, nullable=true)
+     * @ORM\Column(name="email", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $email;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="picture", type="string", length=50, nullable=true)
+     * @ORM\Column(name="picture", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
      */
     private $picture;
 
