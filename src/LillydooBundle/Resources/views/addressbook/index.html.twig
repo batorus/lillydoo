@@ -44,8 +44,8 @@
                         
 
                      {% if entities|length > 0 %}
-                            <div class="table-responsive col-md-12" >
-                                <table class="table no-margin display modules">
+                            <div class="table-responsive" >
+                                <table class="table table-striped table-lg">
                                   <thead>
                                     <tr>
                                         <th>Id</th>
@@ -58,7 +58,7 @@
                                         <th>Birthday</th>
                                         <th>Email</th>
                                         <th>Picture</th>
-                                        <th>Actions</th>                                                                                                               
+                                        <th></th>                                                                                                               
                                     </tr>
                                   </thead>
                                   <tbody>                                     
@@ -75,7 +75,6 @@
                                             <td>{{ entity.email }}</td>
                                             <td>{{ entity.picture }}</td>                                               
 
-
                                             <td>                                                   
                                                   <a href="{{ path('addressbook_edit', { 'id': entity.id }) }}" 
                                                     class="btn btn-block btn-warning btn-sm"
@@ -84,10 +83,9 @@
                                                      Edit
                                                   </a> 
                                                     
-                                                  <a href="{{ path('addressbook_delete', { 'id': entity.id }) }}"
-                                                           
-                                                        class="btn btn-block btn-danger btn-sm " 
-                                                        style ="width:100px;margin:0 auto; color:#fff; margin-top:10px;"                                                           
+                                                  <a href="{{ path('addressbook_delete', { 'id': entity.id }) }}"                                                           
+                                                    class="btn btn-block btn-danger btn-sm " 
+                                                    style ="width:100px;margin:0 auto; color:#fff; margin-top:10px;"                                                           
                                                   >  
                                                       Delete
                                                   </a>                                                                                                                                                                    
@@ -97,17 +95,14 @@
                                   </tbody>
                                 </table>
                                   
-                                      <div class="navigation">
+                                    <div class="navigation">
                                       {#  {{ knp_pagination_render(entities) }}#}
                                     </div>                                
-                              </div><!-- /.table-responsive -->   
+                            </div><!-- /.table-responsive -->   
                   {% endif %}
                 </div><!-- /.box-body -->                      
        </div><!-- /.box -->     
-    </div> 
-                
-
-   
+    </div>  
 {% endblock %}
 
 
