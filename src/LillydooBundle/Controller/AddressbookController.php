@@ -12,19 +12,28 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AddressbookController extends Controller
 {
+  
     /**
      * Lists all addressbook entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $addressbooks = $em->getRepository('LillydooBundle:Addressbook')->findAll();
+        $entities = $em->getRepository('LillydooBundle:Addressbook')->findBy(array('enabled'=>1));
+        
+        // $paginator  = $this->get('knp_paginator');
+        
+        //        $pagination = $paginator->paginate(
+        //                        $query, /* query NOT result */
+        //                        $request->query->getInt('page', 1)/*page number*/,
+        //                        2/*limit per page*/
+        //        );
 
-        return $this->render('addressbook/index.html.twig', array(
-            'addressbooks' => $addressbooks,
-        ));
+        return $this->render('@Lillydoo/addressbook/index.html.twig', array(
+            'entities' => $entities,
+        ));       
     }
 
     /**

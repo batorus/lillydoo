@@ -1,4 +1,4 @@
-addressbook_index:
+addressbook:
     path:     /
     defaults: { _controller: "LillydooBundle:Addressbook:index" }
     methods:  GET
@@ -13,12 +13,26 @@ addressbook_new:
     defaults: { _controller: "LillydooBundle:Addressbook:new" }
     methods:  [GET, POST]
 
+addressbook_create:
+    path:     /create
+    defaults: { _controller: "LillydooBundle:Addressbook:create" }
+    methods:  [POST, PUT, GET] 
+
 addressbook_edit:
     path:     /{id}/edit
     defaults: { _controller: "LillydooBundle:Addressbook:edit" }
     methods:  [GET, POST]
 
+addressbook_update:
+    path:     /{id}/update
+    defaults: { _controller: "LillydooBundle:Addressbook:update" }
+    methods:  [POST, PUT, GET]   
+    
 addressbook_delete:
     path:     /{id}/delete
     defaults: { _controller: "LillydooBundle:Addressbook:delete" }
-    methods:  DELETE
+    methods:  [POST, DELETE]
+
+
+    
+ 

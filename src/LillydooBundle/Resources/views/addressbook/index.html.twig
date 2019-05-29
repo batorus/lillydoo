@@ -1,55 +1,113 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h1>Addressbooks list</h1>
+{% block body %}
+    {{ parent() }}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Street</th>
-                <th>Number</th>
-                <th>Country</th>
-                <th>Phonenumber</th>
-                <th>Birthday</th>
-                <th>Email</th>
-                <th>Picture</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for addressbook in addressbooks %}
-            <tr>
-                <td><a href="{{ path('addressbook_show', { 'id': addressbook.id }) }}">{{ addressbook.id }}</a></td>
-                <td>{{ addressbook.firstname }}</td>
-                <td>{{ addressbook.lastname }}</td>
-                <td>{{ addressbook.street }}</td>
-                <td>{{ addressbook.number }}</td>
-                <td>{{ addressbook.country }}</td>
-                <td>{{ addressbook.phonenumber }}</td>
-                <td>{% if addressbook.birthday %}{{ addressbook.birthday|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ addressbook.email }}</td>
-                <td>{{ addressbook.picture }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('addressbook_show', { 'id': addressbook.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('addressbook_edit', { 'id': addressbook.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+ 
+ <div class="col-md-12 ">           
+            <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Addressbook</h3>
+             
+                </div><!-- /.box-header -->
+                <div class="box-body" style="min-height:500px;background-color: #fcf9ed;">
+                    
+                  {#  <div style="margin: 10px 0px 20px 50px;">
+                       <?php 
 
-    <ul>
-        <li>
-            <a href="{{ path('addressbook_new') }}">Create a new addressbook</a>
-        </li>
-    </ul>
+                       if($this->container->get('session')->getFlashBag()->has('notice')){
+                           foreach ($this->container->get('session')->getFlashBag()->get("notice") as $message) {
+                                   echo '<div style="color:red; font-size:16px;">'.$message.'</div>';
+                               }
+                       } 
+                       ?>
+                    </div> #}
+                  
+{#                <div style="margin: 10px 0px 20px 50px;">
+                    {%if app.session.flashBag.has('notice') %}    
+                        {% for flash_message in app.session.flashBag.get('notice') %}
+                              <div class="flash-notice">
+                                  <div style="color:red; font-size:16px;">{{ flash_message }}</div>
+                              </div>
+                        {% endfor %}
+                    {%endif%}    
+                 </div> #}  
+                 
+                <div style="margin-bottom: 20px;margin-left: 20px;">
+                    <a href="{{ path('addressbook_new')}}" >  
+                        <span class="fa fa-plus"> </span>
+                        <span style="margin-left: 5px; font-size: 15px;">
+                            New Record
+                        </span>
+                    </a>  
+                </div>    
+                        
+
+                     {% if entities|length > 0 %}
+                            <div class="table-responsive col-md-12" >
+                                <table class="table no-margin display modules">
+                                  <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Street name</th>
+                                        <th>Street Number</th>
+                                        <th>Country</th>
+                                        <th>Phone number</th>
+                                        <th>Birthday</th>
+                                        <th>Email</th>
+                                        <th>Picture</th>
+                                        <th>Actions</th>                                                                                                               
+                                    </tr>
+                                  </thead>
+                                  <tbody>                                     
+                                        {% for entity in entities %}   
+                                        <tr>
+                                            <td>{{ entity.id }}</td>
+                                            <td>{{ entity.firstname }}</td>
+                                            <td>{{ entity.lastname }}</td>
+                                            <td>{{ entity.street }}</td>
+                                            <td>{{ entity.number }}</td>
+                                            <td>{{ entity.country }}</td> 
+                                            <td>{{ entity.phonenumber }}</td>
+                                            <td>{% if entity.birthday %}{{ entity.birthday|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{{ entity.email }}</td>
+                                            <td>{{ entity.picture }}</td>                                               
+
+
+                                            <td>                                                   
+                                                  <a href="{{ path('addressbook_edit', { 'id': entity.id }) }}" 
+                                                    class="btn btn-block btn-warning btn-sm"
+                                                    style ="width:100px;margin:0 auto; color:#fff;"                                                            
+                                                   >  
+                                                     Edit
+                                                  </a> 
+                                                    
+                                                  <a href="{{ path('addressbook_delete', { 'id': entity.id }) }}"
+                                                           
+                                                        class="btn btn-block btn-danger btn-sm " 
+                                                        style ="width:100px;margin:0 auto; color:#fff; margin-top:10px;"                                                           
+                                                  >  
+                                                      Delete
+                                                  </a>                                                                                                                                                                    
+                                            </td>                                           
+                                        </tr> 
+                                    {% endfor %}
+                                  </tbody>
+                                </table>
+                                  
+                                      <div class="navigation">
+                                      {#  {{ knp_pagination_render(entities) }}#}
+                                    </div>                                
+                              </div><!-- /.table-responsive -->   
+                  {% endif %}
+                </div><!-- /.box-body -->                      
+       </div><!-- /.box -->     
+    </div> 
+                
+
+   
 {% endblock %}
+
+
