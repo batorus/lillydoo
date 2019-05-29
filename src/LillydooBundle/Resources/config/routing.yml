@@ -1,3 +1,7 @@
+lillydoo_addressbook:
+    resource: "@LillydooBundle/Resources/config/routing/addressbook.yml"
+    prefix:   /addressbook
+
 lillydoo_homepage:
     path:     /
     defaults: { _controller: LillydooBundle:Default:index }

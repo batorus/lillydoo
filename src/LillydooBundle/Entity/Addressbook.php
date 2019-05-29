@@ -24,21 +24,21 @@ class Addressbook
     /**
      * @var string|null
      *
-     * @ORM\Column(name="firstname", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="firstname", type="string", length=55, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="lastname", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="lastname", type="string", length=50, nullable=true)
      */
     private $lastname;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="street", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="street", type="string", length=50, nullable=true)
      */
     private $street;
 
@@ -52,14 +52,14 @@ class Addressbook
     /**
      * @var string|null
      *
-     * @ORM\Column(name="country", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="country", type="string", length=50, nullable=true)
      */
     private $country;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="phonenumber", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="phonenumber", type="string", length=50, nullable=true)
      */
     private $phonenumber;
 
@@ -73,14 +73,14 @@ class Addressbook
     /**
      * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
      */
     private $email;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="picture", type="string", length=50, options={"collation":"utf8_general_ci"}, nullable=true)
+     * @ORM\Column(name="picture", type="string", length=50, nullable=true)
      */
     private $picture;
 

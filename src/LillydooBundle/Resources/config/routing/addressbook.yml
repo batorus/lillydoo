@@ -1,0 +1,24 @@
+addressbook_index:
+    path:     /
+    defaults: { _controller: "LillydooBundle:Addressbook:index" }
+    methods:  GET
+
+addressbook_show:
+    path:     /{id}/show
+    defaults: { _controller: "LillydooBundle:Addressbook:show" }
+    methods:  GET
+
+addressbook_new:
+    path:     /new
+    defaults: { _controller: "LillydooBundle:Addressbook:new" }
+    methods:  [GET, POST]
+
+addressbook_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LillydooBundle:Addressbook:edit" }
+    methods:  [GET, POST]
+
+addressbook_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LillydooBundle:Addressbook:delete" }
+    methods:  DELETE
