@@ -5,6 +5,10 @@ namespace LillydooBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use  Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AddressbookType extends AbstractType
 {
@@ -13,8 +17,132 @@ class AddressbookType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname')->add('lastname')->add('street')->add('number')->add('country')->add('phonenumber')->add('birthday')->add('email')->add('picture');
-    }/**
+        $builder->add('firstname', TextType::class,
+                                array(
+                                        'data' => $options['data']->getFirstname(),
+                                        'label' => "First name",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                                    ))
+                ->add('lastname', TextType::class,
+                                array(
+                                        'data' => $options['data']->getLastname(),
+                                        'label' => "Last name",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                                    ))
+                ->add('street', TextType::class,
+                                array(
+                                        'data' => $options['data']->getStreet(),
+                                        'label' => "Street",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                                    ))
+                ->add('number', TextType::class,
+                                array(
+                                        'data' => $options['data']->getNumber(),
+                                        'label' => "Street number",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                                    ))
+                ->add('country', ChoiceType::class, 
+                                        array(
+                                                'data' => $options['data']->getCountry(),
+                                                'choices'  => array(
+                                                            '1' => 'Germany',
+                                                            '2' => 'Romania',
+                                                            '3' => 'Belgium',
+                                                            '4' => 'Japan',
+                                                            '5' => 'France',
+                                                            '6' => 'Bulgaria',                                                   
+                                                ),
+                                                'placeholder' => '-- Choose an option --', 
+                                                'label'=>"Country",
+                                                // *this line is important*
+                                               // 'choices_as_values' => false,
+                                                'constraints'=>array(
+                                                                    new Assert\NotNull(
+                                                                              array(
+                                                                                    'message' => 'Choose a valid option!',
+                                                                                    ) 
+                                                                    ),
+                                                    )
+                                            )
+                )   
+                ->add('phonenumber', TextType::class,
+                                array(
+                                        'data' => $options['data']->getPhonenumber(),
+                                        'label' => "Phone number",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                                    ))
+                ->add('birthday',DateType::class, array(
+                                        'data' => $options['data']->getBirthday(),
+                                        // renders it as a single text box
+                                        //'format' => 'dd-mm-yy',
+                                         'widget' => 'single_text',
+                                         'attr' =>array('class'=>'js-datepicker'),
+                                         'html5' =>false
+                    ))
+                ->add('email', TextType::class,
+                                array(
+                                        'data' => $options['data']->getEmail(),
+                                        'label' => "Email",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                                    ))
+                ->add('picture');
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

@@ -1,0 +1,172 @@
+{#{{ form_widget(form) }}#}
+
+
+    <table class="table no-margin modules" >
+
+{#      <thead>
+        <tr>
+            <th> {{ form_label(form.name) }}</th> 
+            <th> {{ form_label(form.number) }}</th>  
+            <th> {{ form_label(form.type) }}</th> 
+            <th> {{ form_label(form.details) }} </th> 
+            <th> {{ form_label(form.datecreated) }}</th> 
+            <th> {{ form_label(form.expirationdate) }}</th>   
+            <th> {{ form_label(form.uses) }}</th> 
+            <th> {{ form_label(form.sideeffects) }}</th>  
+            <th> {{ form_label(form.precautions) }}</th> 
+            <th> {{ form_label(form.interactions) }} </th> 
+            <th> {{ form_label(form.overdose) }}</th>         
+        </tr>
+      </thead>    #}  
+
+      <tbody>                  
+        <tr>  
+             {#  firstname  #}
+             <td> 
+                 {{ form_label(form.firstname) }}
+             </td>         
+             <td> 
+                {{ form_widget(form.firstname) }}
+             </td>  
+             <td>                  
+                {% if form.firstname.vars.errors|length > 0 %}       
+                    {% for error in form.firstname.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>              
+        </tr> 
+        <tr>    
+                   {#  lastname  #}
+             <td> 
+                 {{ form_label(form.lastname) }}
+             </td>                    
+             <td>  
+                {{ form_widget(form.lastname) }}
+             </td>
+             <td>                  
+                {% if form.lastname.vars.errors|length > 0 %}       
+                    {% for error in form.lastname.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>              
+        </tr> 
+        <tr>
+                   {#  street  #}
+             <td> 
+                 {{ form_label(form.street) }}
+             </td>                     
+             <td>  
+
+                {{ form_widget(form.street) }}                                
+             </td>
+             <td>                  
+                {% if form.street.vars.errors|length > 0 %}       
+                    {% for error in form.street.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>             
+        </tr> 
+        <tr> 
+                   {#  number  #}  
+             <td> 
+                 {{ form_label(form.number) }}
+             </td>                         
+             <td> 
+                {{ form_widget(form.number) }}                                    
+             </td>  
+              <td>                  
+                {% if form.number.vars.errors|length > 0 %}       
+                    {% for error in form.number.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>            
+        </tr> 
+        <tr> 
+            {#country#}
+            <td> 
+                {{ form_label(form.country) }}
+            </td>             
+            <td> 
+                {{ form_widget(form.country) }}                                   
+            </td> 
+            <td>                 
+                {% if form.country.vars.errors|length > 0 %}       
+                    {% for error in form.country.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+            </td>             
+        </tr>          
+        <tr> 
+            {#phonenumber#}
+            <td> 
+                {{ form_label(form.phonenumber) }}
+            </td>             
+            <td> 
+                {{ form_widget(form.phonenumber) }}                                   
+             </td>  
+            <td>                 
+                {% if form.phonenumber.vars.errors|length > 0 %}       
+                    {% for error in form.phonenumber.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>               
+        </tr> 
+        <tr> 
+            {# birthday #}
+             <td> 
+                 {{ form_label(form.birthday) }}
+             </td>                 
+             <td>   
+                {{ form_widget(form.birthday) }}                                    
+             </td>
+              <td>                  
+                {% if form.birthday.vars.errors|length > 0 %}       
+                    {% for error in form.birthday.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>             
+        </tr>         
+        
+                
+        <tr> 
+            {#email#}
+            <td> 
+                {{ form_label(form.email) }}
+            </td>             
+            <td>    
+                {{ form_widget(form.email) }}                                   
+            </td>
+            <td>                 
+                {% if form.email.vars.errors|length > 0 %}       
+                    {% for error in form.email.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>              
+        </tr>          
+        <tr> 
+            {#picture#}
+            <td> 
+                {{ form_label(form.picture) }}
+            </td>             
+            <td> 
+                {{ form_widget(form.picture) }}                                   
+             </td>  
+             <td>                 
+                {% if form.picture.vars.errors|length > 0 %}       
+                    {% for error in form.interactions.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %}
+             </td>              
+        </tr>
+
+      </tbody>
+    </table>
