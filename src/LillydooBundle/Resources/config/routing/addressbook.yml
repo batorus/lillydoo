@@ -31,7 +31,7 @@ addressbook_update:
 addressbook_delete:
     path:     /{id}/delete
     defaults: { _controller: "LillydooBundle:Addressbook:delete" }
-    methods:  [POST, DELETE]
+    methods:  [POST, DELETE, GET]
 
 
     

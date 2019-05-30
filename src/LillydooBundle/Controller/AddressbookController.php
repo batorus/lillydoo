@@ -190,13 +190,12 @@ class AddressbookController extends Controller
      * Deletes a addressbook entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, int $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('MedicalsystemBundle:Medicament')->find($id);
+        $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
         
          try{     
-
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find entity.');
             };
@@ -204,20 +203,17 @@ class AddressbookController extends Controller
         }catch(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException  $e){           
             
             //Logare exceptie aici
-            // $this->container->get('session')->getFlashBag()->add("error", "L'enregistrement existe déjà dans la base de données!");           
-            //            echo "<pre>";
-            //            print_r($e->getTraceAsString());
-            //            die();
-            return $this->redirect($this->generateUrl('medicament'));
-        };
+             $this->container->get('session')->getFlashBag()->add("error", "The entity could not be found!");           
 
-       
+            return $this->redirect($this->generateUrl('addressbook'));
+        };
+      
         //soft deletion
         $entity->setEnabled(0);   
         //$em->remove($entity);
         $em->flush();
         
-        return $this->redirect($this->generateUrl('medicament'));
+        return $this->redirect($this->generateUrl('addressbook'));
     }
     ###############################################
 
