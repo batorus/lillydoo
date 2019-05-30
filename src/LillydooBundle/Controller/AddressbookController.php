@@ -219,7 +219,7 @@ class AddressbookController extends Controller
 
 
     /**
-     * Finds and displays a addressbook entity.
+     * Finds and displays an addressbook entity.
      *
      */
     public function showAction(Addressbook $addressbook)
