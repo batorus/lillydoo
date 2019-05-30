@@ -58,9 +58,9 @@ class AddressbookController extends Controller
     public function createAction(Request $request)
     {
 
-        $entity = new Medicament();
+        $entity = new Addressbook();
           
-        $form = $this->createForm(new MedicamentType(), $entity);
+        $form = $this->createForm(AddressbookType::class, $entity);
         
         $form->handleRequest($request);
         
@@ -68,30 +68,28 @@ class AddressbookController extends Controller
         $errors = $validator->validate($form);    
                 
         if (count($errors) > 0) 
-        {          
-           
-            return $this->render('MedicalsystemBundle:Medicament:new.html.twig', array(
+        {                    
+            return $this->render('@Lillydoo/addressbook/new.html.twig', array(
                 'entity' => $entity,
                 'form' => $form->createView()
             ));
-
         }
      
         $em = $this->getDoctrine()->getManager();
-        $entity->setName($request->request->get('medicalsystembundle_medicament')['name']);   
-        $entity->setNumber($request->request->get('medicalsystembundle_medicament')['number']);
-        $entity->setType($request->request->get('medicalsystembundle_medicament')['type']);
-        $entity->setDetails($request->request->get('medicalsystembundle_medicament')['details']);   
         
-        $entity->setDatecreated(new \DateTime($request->request->get('medicalsystembundle_medicament')['datecreated']));
-        $entity->setExpirationdate(new \DateTime($request->request->get('medicalsystembundle_medicament')['expirationdate']));
+        $entity->setFirstname($request->request->get('lillydoobundle_addressbook')['firstname']);   
+        $entity->setLastname($request->request->get('lillydoobundle_addressbook')['lastname']);
+        $entity->setStreet($request->request->get('lillydoobundle_addressbook')['street']);
+        $entity->setNumber($request->request->get('lillydoobundle_addressbook')['number']);   
         
-        $entity->setUses($request->request->get('medicalsystembundle_medicament')['uses']);   
-        $entity->setSideeffects($request->request->get('medicalsystembundle_medicament')['sideeffects']);
-        $entity->setPrecautions($request->request->get('medicalsystembundle_medicament')['precautions']);
-        $entity->setInteractions($request->request->get('medicalsystembundle_medicament')['interactions']);   
-        $entity->setOverdose($request->request->get('medicalsystembundle_medicament')['overdose']);
-        $entity->setStorage($request->request->get('medicalsystembundle_medicament')['storage']);
+        $entity->setBirthday(new \DateTime($request->request->get('lillydoobundle_addressbook')['birthday']));
+        
+        $entity->setCountry($request->request->get('lillydoobundle_addressbook')['country']);   
+        $entity->setPhonenumber($request->request->get('lillydoobundle_addressbook')['phonenumber']);
+        
+        $entity->setEmail($request->request->get('lillydoobundle_addressbook')['email']);
+        $entity->setPicture($request->request->get('lillydoobundle_addressbook')['picture']); 
+
         $entity->setEnabled(1);
         $em->persist($entity);
        
@@ -101,14 +99,14 @@ class AddressbookController extends Controller
            
         }catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException  $e){           
             
-           $this->container->get('session')->getFlashBag()->add("error", "L'enregistrement existe déjà dans la base de données!");
+           $this->container->get('session')->getFlashBag()->add("error", "The record already exists into the db!");
             
-           return $this->redirect($this->generateUrl('medicament_new'));
+           return $this->redirect($this->generateUrl('addressbook_new'));
         };
               
-        $this->container->get('session')->getFlashBag()->add("notice", "Enregistrement ajouté avec succès!"); 
+        $this->container->get('session')->getFlashBag()->add("notice", "Record saved into the db!"); 
         
-        return $this->redirect($this->generateUrl('medicament'));    
+        return $this->redirect($this->generateUrl('addressbook'));    
               
     }
 

@@ -122,7 +122,14 @@ class AddressbookType extends AbstractType
                                         //'format' => 'dd-mm-yy',
                                          'widget' => 'single_text',
                                          'attr' =>array('class'=>'js-datepicker'),
-                                         'html5' =>false
+                                         'html5' =>false,
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            )
                     ))
                 ->add('email', TextType::class,
                                 array(
