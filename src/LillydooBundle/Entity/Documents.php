@@ -22,11 +22,10 @@ class Documents
     private $id;
     
     /**
-     * @var int
-     *
-     * @ORM\Column(name="adressbookid", type="integer")
+     * @ORM\ManyToOne(targetEntity="Addressbook", inversedBy="documents")
+     * @ORM\JoinColumn(name="adressbook_id", referencedColumnName="id")
      */
-    protected $adressbookid;
+    protected $addressbook;
     
     
     /**
@@ -162,27 +161,4 @@ class Documents
     
   
 
-    /**
-     * Set adressbookid.
-     *
-     * @param int $adressbookid
-     *
-     * @return Documents
-     */
-    public function setAdressbookid($adressbookid)
-    {
-        $this->adressbookid = $adressbookid;
-
-        return $this;
-    }
-
-    /**
-     * Get adressbookid.
-     *
-     * @return int
-     */
-    public function getAdressbookid()
-    {
-        return $this->adressbookid;
-    }
 }

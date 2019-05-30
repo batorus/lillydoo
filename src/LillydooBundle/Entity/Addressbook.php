@@ -84,6 +84,10 @@ class Addressbook
      */
     private $picture;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Documents", mappedBy="addressbook", cascade={"persist"})
+     */
+    protected $documents;
 
      /**
      * @var int

@@ -70,7 +70,7 @@ class FileUploader {
 
         try{
             $docsentity = new Documents();
-            $entity = $this->em->getRepository('LillydooBundle:Addressbook')->find($id); 
+            $adressbook = $this->em->getRepository('LillydooBundle:Addressbook')->find($id); 
             
             if(!$entity){
                 throw new \Doctrine\Common\Persistence\Mapping\MappingException("Entity not found!");
@@ -92,7 +92,8 @@ class FileUploader {
             $docsentity->setExtension($imagefiletype);                            
             $docsentity->setEnabled(1); 
 
-            $docsentity->setAdressbookid($user);      
+            $docsentity->setAdressbookid($user);     
+            
             $this->em->persist($docsentity);            
 
         try
