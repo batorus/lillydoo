@@ -1,4 +1,15 @@
-services:
-#    lillydoo.example:
-#        class: LillydooBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+services:                      
+    application.file_uploader:
+        class: LillydooBundleBundle\Service\FileUploader
+        arguments: 
+            - '@request_stack'
+            - '@doctrine.orm.entity_manager'
+            - '@session'
+            - '@router'
+            - 'lillydoo'
+            - 'addressbook_edit'
+            - 'lillydoobundle_addressbook'
+            - 'userfile' 
+            - 'description'
+            - '%kernel.root_dir%'
+
