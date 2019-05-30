@@ -24,16 +24,16 @@ class AddressbookController extends Controller
 
         $entities = $em->getRepository('LillydooBundle:Addressbook')->findBy(array('enabled'=>1));
         
-        // $paginator  = $this->get('knp_paginator');
+        $paginator  = $this->get('knp_paginator');
         
-        //        $pagination = $paginator->paginate(
-        //                        $query, /* query NOT result */
-        //                        $request->query->getInt('page', 1)/*page number*/,
-        //                        2/*limit per page*/
-        //        );
+        $pagination = $paginator->paginate(
+                        $entities, /* query NOT result */
+                        $request->query->getInt('page', 1)/*page number*/,
+                        2/*limit per page*/
+        );
 
         return $this->render('@Lillydoo/addressbook/index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $pagination,
         ));       
     }
     
