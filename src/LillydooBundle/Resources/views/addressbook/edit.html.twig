@@ -1,21 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
     <h1>Addressbook edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    {{ form_start(form,{'action': path('addressbook_update', {'id': entity.id}), 
+                        'method': 'POST', 
+                        'name':'addressbook',
+                        'attr': {'novalidate': 'novalidate'}}) }}
+                        
+        {{ include('@Lillydoo/addressbook/form.html.twig') }} 
+               
+        <input type="submit" value="Save" />
+        
+    {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('addressbook_index') }}">Back to the list</a>
+            <a href="{{ path('addressbook') }}">Back to the list</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+
     </ul>
+        
+    {% block javascripts %}
+    {{parent()}}
+        <script type="text/javascript">
+            $(document).ready(function() {               
+                  $(".js-datepicker").datepicker({firstDay: 1,
+                                             dateFormat: "yy-mm-dd",
+                                            // minDate: 0,
+                                             beforeShowDay: $.datepicker.noWeekends,
+                    });
+            });
+        </script>   
+   {% endblock %}            
+          
 {% endblock %}

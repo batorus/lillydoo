@@ -115,29 +115,29 @@ class AddressbookController extends Controller
      * Displays a form to edit an existing medicament entity.
      *
      */
-    public function editAction(Medicament $medicament)
+    public function editAction(Addressbook $addressbook)
     {
-        $editForm = $this->createForm(new MedicamentType(), $medicament);
+        $editForm = $this->createForm(AddressbookType::class, $addressbook);
  
-        return $this->render('MedicalsystemBundle:Medicament:edit.html.twig', array(
-            'entity' => $medicament,
+        return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
+            'entity' => $addressbook,
             'form' => $editForm->createView()
         ));
     }
     
     
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, int $id)
     {
      
         $em = $this->getDoctrine()->getManager();
        
-        $entity = $em->getRepository('MedicalsystemBundle:Medicament')->find($id);
+        $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Medicament entity.');
+            throw $this->createNotFoundException('Unable to find Addressbook entity.');
         }
                
-        $form = $this->createForm(new MedicamentType(), $entity);
+        $form = $this->createForm(AddressbookType::class, $entity);
               
         $form->handleRequest($request);
         $validator = $this->get('validator');
@@ -145,7 +145,7 @@ class AddressbookController extends Controller
                 
         if (count($errors) > 0) 
         {                     
-           return $this->render('MedicalsystemBundle:Medicament:edit.html.twig', array(
+           return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
                                 'entity' => $entity,
                                 'form'   => $form->createView(),
                                 'errors' => $errors
@@ -154,42 +154,40 @@ class AddressbookController extends Controller
         }
         
         $em = $this->getDoctrine()->getManager();
-        $entity->setName($request->request->get('medicalsystembundle_medicament')['name']);   
-        $entity->setNumber($request->request->get('medicalsystembundle_medicament')['number']);
-        $entity->setType($request->request->get('medicalsystembundle_medicament')['type']);
-        $entity->setDetails($request->request->get('medicalsystembundle_medicament')['details']);   
+        $entity->setFirstname($request->request->get('lillydoobundle_addressbook')['firstname']);   
+        $entity->setLastname($request->request->get('lillydoobundle_addressbook')['lastname']);
+        $entity->setStreet($request->request->get('lillydoobundle_addressbook')['street']);
+        $entity->setNumber($request->request->get('lillydoobundle_addressbook')['number']);   
         
-        $entity->setDatecreated(new \DateTime($request->request->get('medicalsystembundle_medicament')['datecreated']));
-        $entity->setExpirationdate(new \DateTime($request->request->get('medicalsystembundle_medicament')['expirationdate']));
+        $entity->setBirthday(new \DateTime($request->request->get('lillydoobundle_addressbook')['birthday']));
         
-        $entity->setUses($request->request->get('medicalsystembundle_medicament')['uses']);   
-        $entity->setSideeffects($request->request->get('medicalsystembundle_medicament')['sideeffects']);
-        $entity->setPrecautions($request->request->get('medicalsystembundle_medicament')['precautions']);
-        $entity->setInteractions($request->request->get('medicalsystembundle_medicament')['interactions']);   
-        $entity->setOverdose($request->request->get('medicalsystembundle_medicament')['overdose']);
-        $entity->setStorage($request->request->get('medicalsystembundle_medicament')['storage']);
+        $entity->setCountry($request->request->get('lillydoobundle_addressbook')['country']);   
+        $entity->setPhonenumber($request->request->get('lillydoobundle_addressbook')['phonenumber']);
+        
+        $entity->setEmail($request->request->get('lillydoobundle_addressbook')['email']);
+        $entity->setPicture($request->request->get('lillydoobundle_addressbook')['picture']); 
+
         $entity->setEnabled(1);
 
         try{     
 
              $em->flush();
 
-        }catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException  $e){           
+        }catch(\Doctrine\DBAL\Exception  $e){           
 
-             $this->container->get('session')->getFlashBag()->add("error", "L'enregistrement existe déjà dans la base de données!");
+             $this->container->get('session')->getFlashBag()->add("error", $e->getMessage());
 
-             return $this->redirect($this->generateUrl('medicament_new'));
+             return $this->redirect($this->generateUrl('addressbook_new'));
         };
 
 
-        $this->container->get('session')->getFlashBag()->add("notice", "Enregistrement ajouté avec succès!"); 
+        $this->container->get('session')->getFlashBag()->add("notice", "Record saved into the db!"); 
 
-        return $this->redirect($this->generateUrl('medicament'));          
-                  
+        return $this->redirect($this->generateUrl('addressbook'));                          
     }
 
     /**
-     * Deletes a medicament entity.
+     * Deletes a addressbook entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -222,32 +220,7 @@ class AddressbookController extends Controller
         return $this->redirect($this->generateUrl('medicament'));
     }
     ###############################################
-    
-    
 
-    /**
-     * Creates a new addressbook entity.
-     *
-     */
-//    public function newAction(Request $request)
-//    {
-//        $addressbook = new Addressbook();
-//        $form = $this->createForm('LillydooBundle\Form\AddressbookType', $addressbook);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($addressbook);
-//            $em->flush();
-//
-//            return $this->redirectToRoute('addressbook_show', array('id' => $addressbook->getId()));
-//        }
-//
-//        return $this->render('addressbook/new.html.twig', array(
-//            'addressbook' => $addressbook,
-//            'form' => $form->createView(),
-//        ));
-//    }
 
     /**
      * Finds and displays a addressbook entity.
@@ -263,60 +236,4 @@ class AddressbookController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to edit an existing addressbook entity.
-     *
-     */
-//    public function editAction(Request $request, Addressbook $addressbook)
-//    {
-//        $deleteForm = $this->createDeleteForm($addressbook);
-//        $editForm = $this->createForm('LillydooBundle\Form\AddressbookType', $addressbook);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $this->getDoctrine()->getManager()->flush();
-//
-//            return $this->redirectToRoute('addressbook_edit', array('id' => $addressbook->getId()));
-//        }
-//
-//        return $this->render('addressbook/edit.html.twig', array(
-//            'addressbook' => $addressbook,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
-
-    /**
-     * Deletes a addressbook entity.
-     *
-     */
-//    public function deleteAction(Request $request, Addressbook $addressbook)
-//    {
-//        $form = $this->createDeleteForm($addressbook);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->remove($addressbook);
-//            $em->flush();
-//        }
-//
-//        return $this->redirectToRoute('addressbook_index');
-//    }
-
-    /**
-     * Creates a form to delete a addressbook entity.
-     *
-     * @param Addressbook $addressbook The addressbook entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-//    private function createDeleteForm(Addressbook $addressbook)
-//    {
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('addressbook_delete', array('id' => $addressbook->getId())))
-//            ->setMethod('DELETE')
-//            ->getForm()
-//        ;
-//    }
 }
