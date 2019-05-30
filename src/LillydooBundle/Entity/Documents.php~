@@ -22,11 +22,10 @@ class Documents
     private $id;
     
     /**
-     * @var int
-     *
-     * @ORM\Column(name="adressbookid", type="integer")
+     * @ORM\ManyToOne(targetEntity="Addressbook", inversedBy="documents")
+     * @ORM\JoinColumn(name="adressbook_id", referencedColumnName="id")
      */
-    protected $adressbookid;
+    protected $addressbook;
     
     
     /**
@@ -160,7 +159,6 @@ class Documents
         return $this->enabled;
     }
     
-   
+  
 
-   
 }

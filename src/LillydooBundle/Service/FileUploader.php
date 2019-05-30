@@ -92,7 +92,7 @@ class FileUploader {
             $docsentity->setExtension($imagefiletype);                            
             $docsentity->setEnabled(1); 
 
-            $docsentity->setAdressbookid($user);     
+            $docsentity->setAddressbook($adressbook);     
             
             $this->em->persist($docsentity);            
 

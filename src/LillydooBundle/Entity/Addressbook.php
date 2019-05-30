@@ -347,4 +347,47 @@ class Addressbook
     {
         return $this->enabled;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add document.
+     *
+     * @param \LillydooBundle\Entity\Documents $document
+     *
+     * @return Addressbook
+     */
+    public function addDocument(\LillydooBundle\Entity\Documents $document)
+    {
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Remove document.
+     *
+     * @param \LillydooBundle\Entity\Documents $document
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeDocument(\LillydooBundle\Entity\Documents $document)
+    {
+        return $this->documents->removeElement($document);
+    }
+
+    /**
+     * Get documents.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
 }

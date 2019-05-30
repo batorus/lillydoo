@@ -161,4 +161,28 @@ class Documents
     
   
 
+
+    /**
+     * Set addressbook.
+     *
+     * @param \LillydooBundle\Entity\Addressbook|null $addressbook
+     *
+     * @return Documents
+     */
+    public function setAddressbook(\LillydooBundle\Entity\Addressbook $addressbook = null)
+    {
+        $this->addressbook = $addressbook;
+
+        return $this;
+    }
+
+    /**
+     * Get addressbook.
+     *
+     * @return \LillydooBundle\Entity\Addressbook|null
+     */
+    public function getAddressbook()
+    {
+        return $this->addressbook;
+    }
 }

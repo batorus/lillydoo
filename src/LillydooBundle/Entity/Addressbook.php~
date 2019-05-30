@@ -84,6 +84,10 @@ class Addressbook
      */
     private $picture;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Documents", mappedBy="addressbook", cascade={"persist"})
+     */
+    protected $documents;
 
      /**
      * @var int
@@ -318,5 +322,29 @@ class Addressbook
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Set enabled.
+     *
+     * @param int $enabled
+     *
+     * @return Addressbook
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled.
+     *
+     * @return int
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }
