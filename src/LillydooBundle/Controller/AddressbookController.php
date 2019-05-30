@@ -54,7 +54,7 @@ class AddressbookController extends Controller
     }
     
     
-   ########################################## Datele sunt trimise aici din New #####################
+   ########################################## Data is sent from New #####################
     public function createAction(Request $request)
     {
 

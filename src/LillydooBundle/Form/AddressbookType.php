@@ -81,12 +81,12 @@ class AddressbookType extends AbstractType
                                         array(
                                                 'data' => $options['data']->getCountry(),
                                                 'choices'  => array(
-                                                            '1' => 'Germany',
-                                                            '2' => 'Romania',
-                                                            '3' => 'Belgium',
-                                                            '4' => 'Japan',
-                                                            '5' => 'France',
-                                                            '6' => 'Bulgaria',                                                   
+                                                            'Germany' => 'Germany',
+                                                            'Romania' => 'Romania',
+                                                            'Belgium' => 'Belgium',
+                                                            'Japan' => 'Japan',
+                                                            'France' => 'France',
+                                                            'Bulgaria' => 'Bulgaria',                                                   
                                                 ),
                                                 'placeholder' => '-- Choose an option --', 
                                                 'label'=>"Country",
