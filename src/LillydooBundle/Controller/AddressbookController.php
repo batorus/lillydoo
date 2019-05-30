@@ -147,7 +147,56 @@ class AddressbookController extends Controller
     
     public function uploadAction(Request $request, $id)
     { 
-        die("here");
+           
+         $em = $this->getDoctrine()->getManager();
+       
+        $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find entity.');
+        }
+      
+        //$documents = $em->getRepository('AnomaliesBundle:Documents')->getRecords($id);
+        $documents = $entity->getDocuments();
+        if (!$documents) {
+            throw $this->createNotFoundException('Unable to find Documents entity.');
+        }
+        
+        $docs = array();
+        $updateForm = array();       
+        foreach($documents as $document){
+            if($document->getEnabled() == 1){
+                $docs[] = $document;
+                $updateForm[] = $this->createForm(DocumentsType::class, $document)->createView();               
+            }
+        }
+
+        
+        $form = $this->createForm(AddressbookType::class, $entity);
+        
+        $uploadForm = $this->createForm( DocumentsType::class, new Documents());      
+        $uploadForm->handleRequest($request);
+        
+        $validator = $this->get('validator');
+        $errors = $validator->validate($uploadForm);  
+           
+        if (count($errors) > 0) 
+        {                    
+            return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
+                'entity' => $entity,
+                'documents'=>$docs,                
+                'form' => $form->createView(),
+                'uploadForm'=>$uploadForm->createView(),
+                'updateForm'=>$updateForm,              
+                'errors' => $errors
+            ));
+
+        }
+        
+       // $em = $this->getDoctrine()->getManager(); 
+        //(new FileUploader($request, $em, $this->container))->uploadAction($id, true);
+         $this->get('application.file_uploader')->uploadAction($id, true);
+        return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
     }    
     
     public function updateAction(Request $request, int $id)

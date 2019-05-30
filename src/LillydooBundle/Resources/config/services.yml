@@ -1,6 +1,6 @@
 services:                      
     application.file_uploader:
-        class: LillydooBundleBundle\Service\FileUploader
+        class: LillydooBundle\Service\FileUploader
         arguments: 
             - '@request_stack'
             - '@doctrine.orm.entity_manager'
@@ -8,7 +8,7 @@ services:
             - '@router'
             - 'lillydoo'
             - 'addressbook_edit'
-            - 'lillydoobundle_addressbook'
+            - 'documents'
             - 'userfile' 
             - 'description'
             - '%kernel.root_dir%'

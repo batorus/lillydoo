@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use LillydooBundle\Entity\Documents;
-
+use LillydooBundle\Entity\Addressbook;
 use LillydooBundle\Helpers\SimpleImage; 
 
 use Symfony\Component\Filesystem\Filesystem;
@@ -45,7 +45,8 @@ class FileUploader {
                                 $nameFileField, 
                                 $nameDescriptionField, 
                                 $rootDir)
-    {        
+    {     
+
         $this->fs = new Filesystem();  
         $this->request = $requestStack->getCurrentRequest();
         $this->session = $session;
@@ -62,17 +63,17 @@ class FileUploader {
         
         $this->pathToImagesOriginals = $rootDir.'/../web/bundles/'.$nameForBundleInWeb.'/images/originals';
         $this->pathToImagesThumbs = $rootDir.'/../web/bundles/'.$nameForBundleInWeb.'/images/thumbs';
+
        // $this->pathToDocuments = $rootDir.'/../web/bundles/'.$nameForBundleInWeb.'/documents';
     }
     
     private function insertRecord(int $id, string $description, string $imagename, $imagefiletype)
     {        
-
         try{
             $docsentity = new Documents();
             $adressbook = $this->em->getRepository('LillydooBundle:Addressbook')->find($id); 
             
-            if(!$entity){
+            if(!$adressbook){
                 throw new \Doctrine\Common\Persistence\Mapping\MappingException("Entity not found!");
             }
 
@@ -158,12 +159,14 @@ class FileUploader {
     
     //true->insert; false->update
     public function uploadAction($id, $insertOrUpload = true)
-    {        
+    {          
         if(!empty($this->request->request->all()))
-        {       
+        {   
+            //echo "<pre>"; 
+            //print_r($this->request->files->get("documents")["userfile"]);die();             
             if($this->request->files->get($this->nameFromType)[$this->nameFileField] != null)
             {
-
+ 
                 $uf = new UploadedFile($this->request->files->get($this->nameFromType)[$this->nameFileField], 
                                        $this->request->files->get($this->nameFromType)[$this->nameFileField]->getClientOriginalName());
 
@@ -250,7 +253,7 @@ class FileUploader {
                     // Check if file already exists                    
                     if (file_exists($target_file)) 
                     {
-                        $this->session->getFlashBag()->add("error", "Le fichier existe déjà."); 
+                        $this->session->getFlashBag()->add("error", "File exists."); 
                        // return new RedirectResponse($this->container->get('router')->generate($this->route, array('id' => $id)));  
                         return false;
 
