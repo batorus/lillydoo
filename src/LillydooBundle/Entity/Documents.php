@@ -23,7 +23,7 @@ class Documents
     
     /**
      * @ORM\ManyToOne(targetEntity="Addressbook", inversedBy="documents")
-     * @ORM\JoinColumn(name="adressbook_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="addressbook_id", referencedColumnName="id")
      */
     protected $addressbook;
     

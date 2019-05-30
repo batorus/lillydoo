@@ -33,6 +33,19 @@ addressbook_delete:
     defaults: { _controller: "LillydooBundle:Addressbook:delete" }
     methods:  [POST, DELETE, GET]
 
-
+addressbook_upload:
+    path:     /{id}/upload
+    defaults: { _controller: "LillydooBundle:Addressbook:upload" }
+    methods:  [POST, PUT, GET]   
+    
+addressbook_deletedocument:
+    path:     /{did}/{id}/deletedocument
+    defaults: { _controller: "LillydooBundle:Addressbook:deletedocument" }
+    methods:  [POST, PUT, GET]  
+    
+addressbook_updatedocument:
+    path:     /{did}/{id}/updatedocument
+    defaults: { _controller: "LillydooBundle:Addressbook:updatedocument" }
+    methods:  [POST, PUT, GET]  
     
  

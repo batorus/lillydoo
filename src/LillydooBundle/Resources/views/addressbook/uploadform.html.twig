@@ -1,0 +1,78 @@
+    <div class="col-md-12" style="border:1px solid black;">                            
+        {{ form_start(uploadForm, 
+                 {'action': path('addressbook_upload', {'id': entity.id}), 
+                  'method': 'POST', 
+                  'name':'addressbookupload',
+                  'attr': {'novalidate': 'novalidate'}}) 
+        }}  
+
+       {#####################}           
+        {#START FORM DESCRIPTION#}
+        <div class="col-md-12" style="padding-top:10px">                          
+            <span class="col-md-2">
+                <span class="pull-right " style="line-height:40px;">
+                    <strong id='desc' > 
+                        {{ form_label(uploadForm.description) }} : 
+                    </strong>    
+                 </span>
+            </span> 
+
+            <span class="col-md-3 ">
+{#                    <span class="pull-right">#}
+                 {{ form_widget(uploadForm.description,{'attr': {'id':'description', 'class': 'form-control', 'style' : 'height:40px;'}}) }}    
+{#                    </span>#}
+            </span> 
+
+            <span class="col-md-4" style="height:40px;border: 1px solid black;padding:0px;">                      
+                {% if uploadForm.description.vars.errors|length > 0 %}       
+                    {% for error in uploadForm.description.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %} 
+            </span>   
+
+        </div> 
+        <div class='col-md-12' style="margin:10px 0px 10px 0px;"></div>                       
+        {#END FORM DESCRIPTION#} 
+       {#####################}
+
+
+       {#####################}            
+        {#START UPLOAD#}
+         <div class="col-md-12">                          
+            <span class="col-md-2" >
+                <span class="pull-right" style="line-height:40px;">
+                    <strong id='desc' > 
+                        {{ form_label(uploadForm.userfile) }} : 
+                    </strong>    
+                 </span>
+            </span> 
+
+            <span class="col-md-3">
+{#                    <span class="pull-right">#}
+                 {{ form_widget(uploadForm.userfile,{'attr': {'id':'userfile', 'style' : 'height:40px;border: 0px solid black;'}}) }}    
+{#                    </span>#}
+            </span> 
+            <span class="col-md-4 pull-left" style="height:40px;border: 1px solid black;padding:0px;" >    
+
+               {% if uploadForm.userfile.vars.errors|length > 0 %}       
+                    {% for error in uploadForm.userfile.vars.errors %}
+                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                    {% endfor %}        
+                {% endif %} 
+            </span>                      
+        </div> 
+        <div class='col-md-12' style="margin:10px 0px 10px 0px;"></div>              
+
+
+        <span class="col-md-2" style="padding-bottom:10px">
+           <span class="pull-left">
+            {{ form_widget(uploadForm.upload,{'attr': {'class':'btn btn-md btn-default btn-flat', 'style' : 'width:170px;margin:0 auto;display: block;'}}) }}
+           </span>
+       </span>                
+    </div> 
+
+        <div class='col-md-12' style="margin:10px 0px 20px 0px; border-bottom: 1px solid #E7E7E7;"></div>         
+
+        {{ form_end(uploadForm) }}
+            

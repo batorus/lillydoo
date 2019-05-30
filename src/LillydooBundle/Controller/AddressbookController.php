@@ -3,10 +3,11 @@
 namespace LillydooBundle\Controller;
 
 use LillydooBundle\Entity\Addressbook;
+use LillydooBundle\Entity\Documents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use LillydooBundle\Form\AddressbookType;
-
+use LillydooBundle\Form\DocumentsType;
 /**
  * Addressbook controller.
  *
@@ -118,13 +119,36 @@ class AddressbookController extends Controller
     public function editAction(Addressbook $addressbook)
     {
         $editForm = $this->createForm(AddressbookType::class, $addressbook);
+        
+        $uploadForm = $this->createForm(DocumentsType::class, new Documents());              
+        $documents = $addressbook->getDocuments();
+        
+        if (!$documents) {
+            throw $this->createNotFoundException('Unable to find Documents entity.');
+        }
+        
+        $updateForm = array();
+        $docs = array();
+        foreach($documents as $document){
+            if($document->getEnabled()==1){
+                $docs[] = $document;
+                $updateForm[] = $this->createForm(DocumentsType::class, $document)->createView();
+            }
+        }            
  
         return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
             'entity' => $addressbook,
-            'form' => $editForm->createView()
+            'form' => $editForm->createView(),
+            'documents'=>$docs,
+            "uploadForm" =>$uploadForm->createView(),
+            'updateForm'=>$updateForm,
         ));
     }
     
+    public function uploadAction(Request $request, $id)
+    { 
+        die("here");
+    }    
     
     public function updateAction(Request $request, int $id)
     {
