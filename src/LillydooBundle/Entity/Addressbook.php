@@ -106,7 +106,7 @@ class Addressbook
      *
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -226,7 +226,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -238,7 +238,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setPhonenumber(?string $phonenumberl): self
+    public function setPhonenumber(?string $phonenumber): self
     {
         $this->phonenumber = $phonenumber;
 
@@ -262,7 +262,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setBirthday(DateTime $birthday): self
+    public function setBirthday(?DateTime $birthday): self
     {
         $this->birthday = $birthday;
 
@@ -274,7 +274,7 @@ class Addressbook
      *
      * @return \DateTime
      */
-    public function getBirthday(): DateTime
+    public function getBirthday(): ?DateTime
     {
         return $this->birthday;
     }
@@ -312,7 +312,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setEnabled(int $enabled): self
+    public function setEnabled(?int $enabled): self
     {
         $this->enabled = $enabled;
 
@@ -324,7 +324,7 @@ class Addressbook
      *
      * @return int
      */
-    public function getEnabled(): int
+    public function getEnabled(): ?int
     {
         return $this->enabled;
     }
@@ -357,7 +357,7 @@ class Addressbook
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeDocument(\LillydooBundle\Entity\Documents $document): ArrayCollection
+    public function removeDocument(\LillydooBundle\Entity\Documents $document): bool
     {
         return $this->documents->removeElement($document);
     }
