@@ -10,16 +10,12 @@
                         
         {{ include('@Lillydoo/addressbook/form.html.twig') }} 
                
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save" class="btn btn-warning btn-sm "/>
         
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('addressbook') }}">Back to the list</a>
-        </li>
+        <a href="{{ path('addressbook') }}" class="btn btn-primary btn-sm">Return</a>
 
-    </ul>
         
          {{ include('@Lillydoo/addressbook/uploadform.html.twig') }}   
          {{ include('@Lillydoo/addressbook/displaymedia.html.twig') }}
