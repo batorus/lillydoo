@@ -1,6 +1,9 @@
 <?php
 
 namespace LillydooBundle\Entity;
+use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -103,7 +106,7 @@ class Addressbook
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -115,7 +118,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setFirstname($firstname = null)
+    public function setFirstname(?string $firstname)
     {
         $this->firstname = $firstname;
 
@@ -127,7 +130,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getFirstname()
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -139,7 +142,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setLastname($lastname = null)
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -151,7 +154,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getLastname()
+    public function getLastname(): ?string 
     {
         return $this->lastname;
     }
@@ -163,7 +166,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setStreet($street)
+    public function setStreet(?string $street): self
     {
         $this->street = $street;
 
@@ -175,7 +178,7 @@ class Addressbook
      *
      * @return string
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -187,7 +190,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setNumber($number = null)
+    public function setNumber(?int $number): self
     {
         $this->number = $number;
 
@@ -199,7 +202,7 @@ class Addressbook
      *
      * @return int|null
      */
-    public function getNumber()
+    public function getNumber(): ?int
     {
         return $this->number;
     }
@@ -211,7 +214,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setCountry($country = null)
+    public function setCountry(?string $country): self
     {
         $this->country = $country;
 
@@ -223,7 +226,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -235,7 +238,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setPhonenumber($phonenumber = null)
+    public function setPhonenumber(?string $phonenumberl): self
     {
         $this->phonenumber = $phonenumber;
 
@@ -247,7 +250,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getPhonenumber()
+    public function getPhonenumber(): ?string
     {
         return $this->phonenumber;
     }
@@ -259,7 +262,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setBirthday($birthday)
+    public function setBirthday(DateTime $birthday): self
     {
         $this->birthday = $birthday;
 
@@ -271,7 +274,7 @@ class Addressbook
      *
      * @return \DateTime
      */
-    public function getBirthday()
+    public function getBirthday(): DateTime
     {
         return $this->birthday;
     }
@@ -283,7 +286,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setEmail($email = null)
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -295,7 +298,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -309,7 +312,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setEnabled($enabled)
+    public function setEnabled(int $enabled): self
     {
         $this->enabled = $enabled;
 
@@ -321,7 +324,7 @@ class Addressbook
      *
      * @return int
      */
-    public function getEnabled()
+    public function getEnabled(): int
     {
         return $this->enabled;
     }
@@ -340,7 +343,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function addDocument(\LillydooBundle\Entity\Documents $document)
+    public function addDocument(\LillydooBundle\Entity\Documents $document): self
     {
         $this->documents[] = $document;
 
@@ -354,7 +357,7 @@ class Addressbook
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeDocument(\LillydooBundle\Entity\Documents $document)
+    public function removeDocument(\LillydooBundle\Entity\Documents $document): ArrayCollection
     {
         return $this->documents->removeElement($document);
     }
@@ -364,7 +367,7 @@ class Addressbook
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDocuments()
+    public function getDocuments(): Collection
     {
         return $this->documents;
     }
@@ -376,7 +379,7 @@ class Addressbook
      *
      * @return Addressbook
      */
-    public function setZipcode($zipcode = null)
+    public function setZipcode(?string $zipcode): self
     {
         $this->zipcode = $zipcode;
 
@@ -388,7 +391,7 @@ class Addressbook
      *
      * @return string|null
      */
-    public function getZipcode()
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
