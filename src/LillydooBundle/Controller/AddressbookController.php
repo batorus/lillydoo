@@ -75,7 +75,7 @@ class AddressbookController extends Controller
         return $this->redirect($this->generateUrl('addressbook'));           
     }
     
-    ####################################################
+   
      /**
      * Creates a new addressbook entity.
      *
@@ -92,7 +92,7 @@ class AddressbookController extends Controller
     }
     
     
-   ########################################## Data is sent from New #####################
+   ########################################## Data is sent here from New #####################
     public function createAction(Request $request): Response
     {
 
@@ -297,7 +297,7 @@ class AddressbookController extends Controller
 
             $em->flush();
 
-        }catch(\Doctrine\DBAL\Exception  $e){           
+        }catch(\Doctrine\DBAL\DBALException  $e){           
 
             $this->container->get('session')->getFlashBag()->add("error", $e->getMessage());
 
@@ -339,7 +339,7 @@ class AddressbookController extends Controller
             
             $em->flush();
 
-        }catch(\Doctrine\DBAL\Exception  $e){           
+        }catch(\Doctrine\DBAL\DBALException  $e){           
 
             $this->container->get('session')->getFlashBag()->add("error", $e->getMessage());
 
