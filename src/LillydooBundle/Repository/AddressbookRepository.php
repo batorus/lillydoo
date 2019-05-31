@@ -10,4 +10,15 @@ namespace LillydooBundle\Repository;
  */
 class AddressbookRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEnabledRecords()
+    {      
+                return $this->createQueryBuilder('a')
+                    ->andWhere('a.enabled = :enabled')
+                    ->leftJoin("a.documents", "docs")
+                    ->addSelect("docs")
+                    ->setParameter('enabled', '1')
+                    ->orderBy('a.firstname', 'ASC')
+                    ->getQuery()
+                    ->execute();
+    }
 }

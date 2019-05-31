@@ -23,12 +23,10 @@ class AddressbookController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('LillydooBundle:Addressbook')->findBy(array('enabled'=>1));
+       // $entities = $em->getRepository('LillydooBundle:Addressbook')->findBy(array('enabled'=>1));
+        //faster way
+        $entities = $em->getRepository('LillydooBundle:Addressbook')->getEnabledRecords();
          
-//        foreach ($entities as $entity)
-//            var_dump($entity->getDocuments());
-//        
-//        die();
         
         $paginator  = $this->get('knp_paginator');
         
