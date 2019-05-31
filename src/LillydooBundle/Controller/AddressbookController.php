@@ -24,13 +24,18 @@ class AddressbookController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('LillydooBundle:Addressbook')->findBy(array('enabled'=>1));
+         
+//        foreach ($entities as $entity)
+//            var_dump($entity->getDocuments());
+//        
+//        die();
         
         $paginator  = $this->get('knp_paginator');
         
         $pagination = $paginator->paginate(
                         $entities, /* query NOT result */
                         $request->query->getInt('page', 1)/*page number*/,
-                        2/*limit per page*/
+                        5/*limit per page*/
         );
 
         return $this->render('@Lillydoo/addressbook/index.html.twig', array(
@@ -89,7 +94,7 @@ class AddressbookController extends Controller
         $entity->setPhonenumber($request->request->get('lillydoobundle_addressbook')['phonenumber']);
         
         $entity->setEmail($request->request->get('lillydoobundle_addressbook')['email']);
-        $entity->setPicture($request->request->get('lillydoobundle_addressbook')['picture']); 
+        $entity->setZipcode($request->request->get('lillydoobundle_addressbook')['zipcode']); 
 
         $entity->setEnabled(1);
         $em->persist($entity);
@@ -253,7 +258,7 @@ class AddressbookController extends Controller
         $entity->setPhonenumber($request->request->get('lillydoobundle_addressbook')['phonenumber']);
         
         $entity->setEmail($request->request->get('lillydoobundle_addressbook')['email']);
-        $entity->setPicture($request->request->get('lillydoobundle_addressbook')['picture']); 
+        $entity->setZipcode($request->request->get('lillydoobundle_addressbook')['zipcode']); 
 
         $entity->setEnabled(1);
 

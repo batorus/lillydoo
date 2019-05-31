@@ -80,9 +80,9 @@ class Addressbook
     /**
      * @var string|null
      *
-     * @ORM\Column(name="picture", type="string", length=50, nullable=true)
+     * @ORM\Column(name="zipcode", type="string", length=50, nullable=true)
      */
-    private $picture;
+    private $zipcode;
 
     /**
      * @ORM\OneToMany(targetEntity="Documents", mappedBy="addressbook", cascade={"persist"})
@@ -300,29 +300,7 @@ class Addressbook
         return $this->email;
     }
 
-    /**
-     * Set picture.
-     *
-     * @param string|null $picture
-     *
-     * @return Addressbook
-     */
-    public function setPicture($picture = null)
-    {
-        $this->picture = $picture;
 
-        return $this;
-    }
-
-    /**
-     * Get picture.
-     *
-     * @return string|null
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
 
     /**
      * Set enabled.
@@ -389,5 +367,29 @@ class Addressbook
     public function getDocuments()
     {
         return $this->documents;
+    }
+
+    /**
+     * Set zipcode.
+     *
+     * @param string|null $zipcode
+     *
+     * @return Addressbook
+     */
+    public function setZipcode($zipcode = null)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcode.
+     *
+     * @return string|null
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
     }
 }

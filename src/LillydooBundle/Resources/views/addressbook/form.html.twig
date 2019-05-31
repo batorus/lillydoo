@@ -152,16 +152,16 @@
              </td>              
         </tr>          
         <tr> 
-            {#picture#}
+            {#zipcode#}
             <td> 
-                {{ form_label(form.picture) }}
+                {{ form_label(form.zipcode) }}
             </td>             
             <td> 
-                {{ form_widget(form.picture) }}                                   
+                {{ form_widget(form.zipcode) }}                                   
              </td>  
              <td>                 
-                {% if form.picture.vars.errors|length > 0 %}       
-                    {% for error in form.interactions.vars.errors %}
+                {% if form.zipcode.vars.errors|length > 0 %}       
+                    {% for error in form.zipcode.vars.errors %}
                        <div style="color:red; font-size:16px;">{{ error.message }}</div>
                     {% endfor %}        
                 {% endif %}

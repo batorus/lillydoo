@@ -57,8 +57,9 @@
                                         <th>Phone number</th>
                                         <th>Birthday</th>
                                         <th>Email</th>
-                                        <th>Picture</th>
-                                        <th></th>                                                                                                               
+                                        <th>Zipcode</th>
+                                        <th>Picture</th>                                        
+                                        <th>Actions</th>                                                                                                               
                                     </tr>
                                   </thead>
                                   <tbody>                                     
@@ -73,8 +74,46 @@
                                             <td>{{ entity.phonenumber }}</td>
                                             <td>{% if entity.birthday %}{{ entity.birthday|date('Y-m-d') }}{% endif %}</td>
                                             <td>{{ entity.email }}</td>
-                                            <td>{{ entity.picture }}</td>                                               
+                                            <td>{{ entity.zipcode }}</td>  
+                                            
+                                            <td>
+                                                {% if entity.documents|length > 0 %}
+                                                    
+                                                    {% for doc in entity.documents %}
 
+                                                        {%set imagepath = kernelRootDir~'/../web/bundles/lillydoo/images/originals/'~doc.name~'.'~doc.extension%}
+                                                        {%set thumbimagepath = kernelRootDir~'/../web/bundles/lillydoo/images/thumbs/'~doc.name~'.'~doc.extension%}
+
+                                                        {% set assetimagepath = asset('bundles/lillydoo/images/originals/')~doc.name~'.'~doc.extension %}
+                                                        {% set assetthumbimagepath = asset('bundles/lillydoo/images/thumbs/')~doc.name~'.'~doc.extension %}
+
+                                                        {% if  isfile(imagepath) and  isfile(thumbimagepath) %}
+
+
+{#                                                                <td>  
+                                                                    <a href="{{assetimagepath}}"
+                                                                               target="_blank"
+                                                                               style ="width:150px;" > 
+                                                                        {{doc.description}}
+                                                                    </a>                           
+
+                                                                </td>   #} 
+
+
+
+                                                                <span style="padding:5px">
+                                                                      <img src="{{assetthumbimagepath}}" width="100" height="100"/>
+                                                                </span>
+
+                                                        {% endif %}
+
+                                                    {% endfor %}
+                                                    
+                                                {% else %}
+                                                    Add picture!
+                                                {% endif %}
+                                            </td> 
+                                            
                                             <td>                                                   
                                                   <a href="{{ path('addressbook_edit', { 'id': entity.id }) }}" 
                                                     class="btn btn-block btn-warning btn-sm"

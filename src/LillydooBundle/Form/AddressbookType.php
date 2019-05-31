@@ -146,7 +146,21 @@ class AddressbookType extends AbstractType
                                                         //'style' => 'width:250px', 
                                                         )                                   
                                     ))
-                ->add('picture');
+                ->add('zipcode', TextType::class,
+                                array(
+                                        'data' => $options['data']->getZipcode(),
+                                        'label' => "Zip Code",
+                                        'constraints'=>array( 
+                                                              new Assert\NotBlank(
+                                                                      array(
+                                                                            'message' => 'This value should not be blank!',
+                                                                            )        
+                                                                    )
+                                                            ),
+                                        'attr' => array(
+                                                        //'style' => 'width:250px', 
+                                                        )                                   
+                    ));
     }
     
     /**
