@@ -12,7 +12,7 @@ class AddressbookRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getEnabledRecords()
     {      
-                return $this->createQueryBuilder('a')
+        return $this->createQueryBuilder('a')
                     ->andWhere('a.enabled = :enabled')
                     ->leftJoin("a.documents", "docs")
                     ->addSelect("docs")
@@ -20,5 +20,25 @@ class AddressbookRepository extends \Doctrine\ORM\EntityRepository
                     ->orderBy('a.firstname', 'ASC')
                     ->getQuery()
                     ->execute();
+    }
+    
+    
+    public function searchRecords(string $searchterm)
+    {                           
+        return $this->createQueryBuilder('a')
+                    ->where('a.firstname LIKE :searchterm')
+                    ->orWhere('a.lastname LIKE :searchterm')        
+                    ->orWhere('a.street LIKE :searchterm')   
+                    ->orWhere('a.number LIKE :searchterm')   
+                    ->orWhere('a.country LIKE :searchterm')        
+                    ->orWhere('a.phonenumber LIKE :searchterm') 
+                    ->orWhere('a.email LIKE :searchterm')   
+                    ->orWhere('a.zipcode LIKE :searchterm')                  
+                    ->leftJoin("a.documents", "docs")
+                    ->addSelect("docs")
+                    ->setParameter('searchterm', '%'.addcslashes($searchterm, '%_').'%')   
+                    ->orderBy('a.firstname', 'ASC')
+                    ->getQuery()
+                    ->execute();                              
     }
 }
