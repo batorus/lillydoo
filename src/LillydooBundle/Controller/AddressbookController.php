@@ -193,7 +193,12 @@ class AddressbookController extends Controller
 
         }
         
-        $this->get('application.file_uploader')->uploadAction($id, true);
+        try{
+            
+            $this->get('application.file_uploader')->uploadAction($id, true);
+        }catch(\RuntimeException $e){
+            echo $e->getTrace(); die();
+        }
         return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
     }  
     

@@ -204,20 +204,21 @@ class FileUploader {
                             $this->session->getFlashBag()->add("error", "Empty Description");                               
                             return false;
                         }
+                        
                         try{
 
                             $uf->move($target_dir, $this->request->files->get($this->nameFromType)[$this->nameFileField]->getClientOriginalName());     
 
                             //forteaza aici exceptia ca sa testezi executia din catch
                            // throw new FileException(); 
-                        } catch (FileException $ex) {
-
+                        } catch (FileException $e) {
                             $this->session->getFlashBag()->add("error", "Error during moving file!");
                             //die("not ok");
                             //return new RedirectResponse($this->container->get('router')->generate($this->route, array('id' => $id)));
                             return false;
 
                         }
+
                             $image = new SimpleImage($target_file);
                              
                              //width x height

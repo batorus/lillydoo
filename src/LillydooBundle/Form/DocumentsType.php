@@ -62,7 +62,7 @@ class DocumentsType extends AbstractType
             ->add('description', TextType::class,
                                 array(
                                         'data' => $options['data']->getDescription(),
-                                        'label' => "Description du fichier",
+                                        'label' => "File description",
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
