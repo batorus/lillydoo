@@ -41,6 +41,35 @@ class AddressbookController extends Controller
         ));       
     }
     
+    
+    /**
+     * Lists all searched addressbook entities.
+     *
+     */
+    public function searchAction(Request $request)
+    {
+        echo "<pre>";
+        print_r($request->request->get("searchterm"));die();
+        
+        $em = $this->getDoctrine()->getManager();
+
+        //faster way
+        $entities = $em->getRepository('LillydooBundle:Addressbook')->getEnabledRecords();
+         
+        
+        $paginator  = $this->get('knp_paginator');
+        
+        $pagination = $paginator->paginate(
+                        $entities, /* query NOT result */
+                        $request->query->getInt('page', 1)/*page number*/,
+                        5/*limit per page*/
+        );
+
+        return $this->render('@Lillydoo/addressbook/index.html.twig', array(
+            'entities' => $pagination,
+        ));       
+    }
+    
     ####################################################
      /**
      * Creates a new addressbook entity.

@@ -49,3 +49,7 @@ addressbook_updatedocument:
     methods:  [POST, PUT, GET]  
     
  
+addressbook_search:
+    path:     /search
+    defaults: { _controller: "LillydooBundle:Addressbook:search" }
+    methods:  [POST, GET]  
