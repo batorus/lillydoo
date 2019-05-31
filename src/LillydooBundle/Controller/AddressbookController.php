@@ -6,6 +6,7 @@ use LillydooBundle\Entity\Addressbook;
 use LillydooBundle\Entity\Documents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use LillydooBundle\Form\AddressbookType;
 use LillydooBundle\Form\DocumentsType;
 /**
@@ -19,7 +20,7 @@ class AddressbookController extends Controller
      * Lists all addressbook entities.
      *
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -46,7 +47,7 @@ class AddressbookController extends Controller
      * Lists all searched addressbook entities.
      *
      */
-    public function searchAction(Request $request)
+    public function searchAction(Request $request): Response
     {
     
         if($request->request->get("searchterm") != null){
@@ -79,7 +80,7 @@ class AddressbookController extends Controller
      * Creates a new addressbook entity.
      *
      */
-    public function newAction()
+    public function newAction(): Response
     {
         $entity = new Addressbook();
         $form = $this->createForm(AddressbookType::class, $entity);
@@ -92,7 +93,7 @@ class AddressbookController extends Controller
     
     
    ########################################## Data is sent from New #####################
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
 
         $entity = new Addressbook();
@@ -152,7 +153,7 @@ class AddressbookController extends Controller
      * Displays a form to edit an existing medicament entity.
      *
      */
-    public function editAction(Addressbook $addressbook)
+    public function editAction(Addressbook $addressbook): Response
     {
         $editForm = $this->createForm(AddressbookType::class, $addressbook);
         
@@ -181,10 +182,10 @@ class AddressbookController extends Controller
         ));
     }
     
-    public function uploadAction(Request $request, $id)
+    public function uploadAction(Request $request, int $id): Response
     { 
            
-         $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
        
         $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
 
@@ -229,8 +230,7 @@ class AddressbookController extends Controller
 
         }
         
-        try{
-            
+        try{           
             $this->get('application.file_uploader')->uploadAction($id, true);
         }catch(\RuntimeException $e){
             echo $e->getTrace(); die();
@@ -238,19 +238,19 @@ class AddressbookController extends Controller
         return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
     }  
     
-    public function updatedocumentAction(Request $request, $did, $id)
+    public function updatedocumentAction(Request $request, int $did, int $id)
     {   
         die("update document");
     }
     
-    public function deletedocumentAction(Request $request, $did, $id)
+    public function deletedocumentAction(Request $request, int $did, int $id): Response
     { 
         $em = $this->getDoctrine()->getManager();
         $this->get('application.file_uploader')->deletedocumentAction($did);
         return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
     }
     
-    public function updateAction(Request $request, int $id)
+    public function updateAction(Request $request, int $id): Response
     {
      
         $em = $this->getDoctrine()->getManager();
@@ -269,7 +269,7 @@ class AddressbookController extends Controller
                 
         if (count($errors) > 0) 
         {                     
-           return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
+            return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
                                 'entity' => $entity,
                                 'form'   => $form->createView(),
                                 'errors' => $errors
@@ -295,13 +295,13 @@ class AddressbookController extends Controller
 
         try{     
 
-             $em->flush();
+            $em->flush();
 
         }catch(\Doctrine\DBAL\Exception  $e){           
 
-             $this->container->get('session')->getFlashBag()->add("error", $e->getMessage());
+            $this->container->get('session')->getFlashBag()->add("error", $e->getMessage());
 
-             return $this->redirect($this->generateUrl('addressbook_new'));
+            return $this->redirect($this->generateUrl('addressbook_new'));
         };
 
 
@@ -314,7 +314,7 @@ class AddressbookController extends Controller
      * Deletes a addressbook entity.
      *
      */
-    public function deleteAction(Request $request, int $id)
+    public function deleteAction(Request $request, int $id): Response
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
@@ -335,7 +335,15 @@ class AddressbookController extends Controller
         //soft deletion
         $entity->setEnabled(0);   
         //$em->remove($entity);
-        $em->flush();
+        try{     
+            
+            $em->flush();
+
+        }catch(\Doctrine\DBAL\Exception  $e){           
+
+            $this->container->get('session')->getFlashBag()->add("error", $e->getMessage());
+
+        };
         
         return $this->redirect($this->generateUrl('addressbook'));
     }
@@ -346,7 +354,7 @@ class AddressbookController extends Controller
      * Finds and displays an addressbook entity.
      *
      */
-    public function showAction(Addressbook $addressbook)
+    public function showAction(Addressbook $addressbook): Response
     {
         $deleteForm = $this->createDeleteForm($addressbook);
 
