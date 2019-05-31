@@ -12,4 +12,10 @@ services:
             - 'userfile' 
             - 'description'
             - '%kernel.root_dir%'
+            
+    application.twig_extension:
+        class: LillydooBundle\Twig\LillydooExtension
+        public: false
+        tags:
+            - { name: twig.extension }            
 

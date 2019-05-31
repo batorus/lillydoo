@@ -204,7 +204,9 @@ class AddressbookController extends Controller
     
     public function deletedocumentAction(Request $request, $did, $id)
     { 
-        die("delete document");
+        $em = $this->getDoctrine()->getManager();
+        $this->get('application.file_uploader')->deletedocumentAction($did);
+        return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
     }
     
     public function updateAction(Request $request, int $id)

@@ -1,6 +1,6 @@
 <?php
 
-namespace AnomaliesBundle\Entity;
+namespace LillydooBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

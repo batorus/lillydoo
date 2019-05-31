@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Documents
  *
  * @ORM\Table(name="documents")
- * @ORM\Entity(repositoryClass="AnomaliesBundle\Entity\DocumentsRepository")
+ * @ORM\Entity(repositoryClass="LillydooBundle\Repository\DocumentsRepository")
  */
 class Documents
 {
