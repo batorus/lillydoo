@@ -12,17 +12,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body" style="min-height:500px;background-color: #fcf9ed;">
                     
-                  {#  <div style="margin: 10px 0px 20px 50px;">
-                       <?php 
-
-                       if($this->container->get('session')->getFlashBag()->has('notice')){
-                           foreach ($this->container->get('session')->getFlashBag()->get("notice") as $message) {
-                                   echo '<div style="color:red; font-size:16px;">'.$message.'</div>';
-                               }
-                       } 
-                       ?>
-                    </div> #}
-                  
+                
                 <div style="margin: 10px 0px 20px 50px;">
                     {%if app.session.flashBag.has('notice') %}    
                         {% for flash_message in app.session.flashBag.get('notice') %}
@@ -89,26 +79,24 @@
 
                                                         {% if  isfile(imagepath) and  isfile(thumbimagepath) %}
 
-
-{#                                                                <td>  
-                                                                    <a href="{{assetimagepath}}"
-                                                                               target="_blank"
-                                                                               style ="width:150px;" > 
-                                                                        {{doc.description}}
-                                                                    </a>                           
-
-                                                                </td>   #} 
-
-                                                                <span style="padding:5px">
-                                                                      <img src="{{assetthumbimagepath}}" width="100" height="100"/>
-                                                                </span>
+                                                            <span style="padding:5px">
+                                                                <a href="{{assetimagepath}}" target="_blank"> 
+                                                                  <img src="{{assetthumbimagepath}}" width="100" height="100"/>
+                                                                </a> 
+                                                            </span>
 
                                                         {% endif %}
 
                                                     {% endfor %}
                                                     
                                                 {% else %}
-                                                    Add picture!
+                                                   <a href="{{ path('addressbook_edit', { 'id': entity.id }) }}" 
+                                                    class="btn btn-block btn-primary btn-sm"
+                                                    style ="width:100px;margin:0 auto; color:#fff;"                                                            
+                                                   >  
+                                                        Add picture!
+                                                  </a> 
+
                                                 {% endif %}
                                             </td> 
                                             
