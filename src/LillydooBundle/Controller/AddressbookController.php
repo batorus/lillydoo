@@ -193,11 +193,19 @@ class AddressbookController extends Controller
 
         }
         
-       // $em = $this->getDoctrine()->getManager(); 
-        //(new FileUploader($request, $em, $this->container))->uploadAction($id, true);
-         $this->get('application.file_uploader')->uploadAction($id, true);
+        $this->get('application.file_uploader')->uploadAction($id, true);
         return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
-    }    
+    }  
+    
+    public function updatedocumentAction(Request $request, $did, $id)
+    {   
+        die("update document");
+    }
+    
+    public function deletedocumentAction(Request $request, $did, $id)
+    { 
+        die("delete document");
+    }
     
     public function updateAction(Request $request, int $id)
     {

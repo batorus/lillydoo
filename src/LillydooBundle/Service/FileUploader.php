@@ -265,7 +265,7 @@ class FileUploader {
                            // throw new FileException();
                         } catch (FileException $ex) {
 
-                            $this->session->getFlashBag()->add("error", "Une erreur s'est produite lors de l'envoi de votre fichier !");
+                            $this->session->getFlashBag()->add("error", "An error occured during the moving of the file!");
 
                             //return new RedirectResponse($this->container->get('router')->generate($this->route, array('id' => $id))); 
                             return false;
@@ -286,7 +286,7 @@ class FileUploader {
             }
             else
             {
-                $this->session->getFlashBag()->add("error", "Vous devez sélectionner un fichier !");
+                $this->session->getFlashBag()->add("error", "You have to choose a file!");
                 //return new RedirectResponse($this->router->generate($this->route, array('id' => $id)));
                 return false;
             }

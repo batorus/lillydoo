@@ -1,0 +1,158 @@
+
+        
+    {#####################}            
+    {#START AFISARE INREGISTRARI#}       
+  {% if  documents is defined and documents|length > 0 and updateForm|length > 0 %}        
+ 
+        <table class="table no-margin modules" >                                        
+            <thead>
+              <tr>
+                  <th>Id</th>                   
+                  <th>Description</th>  
+                  <th>File name</th>  
+                  <th>Update</th>                    
+                  <th>Delete</th>  
+              </tr>
+            </thead>      
+
+            <tbody> 
+            {%set i = 0 %}    
+            {% for doc in documents %}
+
+                    {%set imagepath = kernelRootDir~'/../web/bundles/anomaliesdecode/images/originals/'~doc.name~'.'~doc.extension%}
+                    {%set thumbimagepath = kernelRootDir~'/../web/bundles/anomaliesdecode/images/thumbs/'~doc.name~'.'~doc.extension%}
+                    {%set documentpath = kernelRootDir~'/../web/bundles/anomaliesdecode/documents/'~doc.name~'.'~doc.extension%}   
+                    
+                    {% set assetimagepath = asset('bundles/anomaliesdecode/images/originals/')~doc.name~'.'~doc.extension %}
+                    {% set assetthumbimagepath = asset('bundles/anomaliesdecode/images/thumbs/')~doc.name~'.'~doc.extension %}
+                    {% set assetdocumentpath = asset('bundles/anomaliesdecode/documents/')~doc.name~'.'~doc.extension %}
+                    
+                    {% if  isfile(imagepath) and  isfile(thumbimagepath) %}
+                        <tr>  
+                            <td>  
+                                {{doc.id}}
+                            </td> 
+                            <td>  
+                                <a href="{{assetimagepath}}"
+                                           target="_blank"
+                                           style ="width:150px;" > 
+                                    {{doc.description}}
+                                </a>                           
+
+                            </td>    
+                            <td>  
+                                <div class="col-md-12" style="width:460px;padding:0px">  
+                                    <span class="col-md-6">
+                                    {{doc.name}}.{{doc.extension}}
+                                    </span>
+                                    <span class="col-md-6" style="padding:5px">
+                                          <img src="{{assetthumbimagepath}}"/>
+                                    </span>
+                                </div>  
+                            </td>
+                            
+                             <td>                             
+                              {# START FORMULAR UPDATE AICI 
+                              ######################################### #}
+                              
+                              <div class="col-md-12" style="padding:0px;">    
+                                  
+                               {{form_start(updateForm[i], 
+                                        {'action': path('addressbook_updatedocument',{'did':doc.id, 'id':entity.id}), 
+                                         'method': 'POST', 
+                                         'name':'addressbook_updatedocument',
+                                         'attr': {'novalidate': 'novalidate'}}) 
+                               }}  
+
+                              {#####################}           
+                               {#START FORM DESCRIPTION#}
+                               <div class="col-md-12" style="padding:0px;">                          
+                                   <span class="col-md-4">
+                                       <span class="pull-left" style="height:40px;border: 0px solid black;padding:10px;">
+                                           <strong id='desc' > 
+                                               {{ form_label(updateForm[i].description) }} : 
+                                           </strong>    
+                                        </span>
+                                   </span> 
+
+                                   <span class="col-md-4">
+                                       <span class="pull-right">
+                                        {{ form_widget(updateForm[i].description,{'attr': {'id':'description', 'class': 'form-control', 'style' : 'height:40px;'}}) }}  
+                                       </span>
+                                   </span> 
+
+                                   <span class="col-md-4 pull-left" style="height:40px;border: 0px solid black;padding:10px;">                      
+                                       {% if updateForm[i].description.vars.errors|length > 0 %}       
+                                           {% for error in updateForm[i].description.vars.errors %}
+                                              <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                                           {% endfor %}        
+                                       {% endif %} 
+                                   </span>   
+
+                               </div> 
+                               <div class='col-md-12' style="margin:10px 0px 10px 0px;"></div>                       
+                               {#END FORM DESCRIPTION#} 
+                              {#####################}
+
+
+                              {#####################}            
+                               {#START UPLOAD#}
+                                <div class="col-md-12" style="padding:0px;">                          
+                                   <span class="col-md-4 " class="pull-left">
+                                       <span class="pull-left" style="height:40px;border: 0px solid black;padding:10px;">
+                                           <strong id='desc' class="pull-right"> 
+                                               {{ form_label(updateForm[i].userfile) }} : 
+                                           </strong>    
+                                        </span>
+                                   </span> 
+
+                                   <span class="col-md-4">
+                                       <span class="pull-right">
+                                        {{ form_widget(updateForm[i].userfile,{'attr': {'id':'userfile', 'style' : 'width:160px;height:40px;border: 0px solid black;'}}) }}    
+                                       </span>
+                                   </span> 
+                                   <span class="col-md-4 pull-left" style="height:40px;border: 0px solid black;padding:10px;" >    
+
+                                      {% if updateForm[i].userfile.vars.errors|length > 0 %}       
+                                           {% for error in updateForm[i].userfile.vars.errors %}
+                                              <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                                           {% endfor %}        
+                                       {% endif %} 
+                                   </span>                      
+                               </div> 
+                               <div class='col-md-12' style="margin:10px 0px 10px 0px;"></div>              
+
+                               <span class="col-md-4">
+                                  <span class="pull-left">
+                                   {{ form_widget(updateForm[i].upload,{'attr': {'class':'btn btn-md btn-warning btn-flat', 'style' : 'margin:0 auto;display: block;'}}) }}
+                                  </span>
+                              </span>             
+     
+
+                               {{ form_end(updateForm[i]) }}                             
+                               {# END FORMULAR UPDATE AICI 
+                              #################################}                             
+
+                                    
+                                    
+                            </div>
+                            </td>                            
+                            
+                            <td>                  
+                                <a href="{{ path('roleuser_deletedocument',{'did':doc.id, 'id':entity.id}) }}" 
+                                    class="btn btn-md btn-danger btn-flat"
+                                    style ="width:150px;"                                                            
+                                >                                                       
+                                   Delete
+                                </a> 
+                            </td>   
+                         </tr> 
+                    {% endif %}
+ 
+                    {% set i = i+1 %} 
+            {% endfor %}
+        </tbody>
+     </table>    
+    {% endif %}  
+    {#####################}            
+    {#END AFISARE INREGISTRARI#}      

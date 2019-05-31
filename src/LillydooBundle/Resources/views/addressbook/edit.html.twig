@@ -20,7 +20,10 @@
         </li>
 
     </ul>
-         {{ include('@Lillydoo/addressbook/uploadform.html.twig') }}        
+        
+         {{ include('@Lillydoo/addressbook/uploadform.html.twig') }}   
+         {{ include('@Lillydoo/addressbook/displaymedia.html.twig') }}
+         
     {% block javascripts %}
     {{parent()}}
         <script type="text/javascript">
