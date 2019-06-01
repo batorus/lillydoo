@@ -1,7 +1,6 @@
 
-        
     {#####################}            
-    {#START AFISARE INREGISTRARI#}       
+    {#START Display images #}       
   {% if  documents is defined and documents|length > 0 and updateForm|length > 0 %}        
  
         <table class="table no-margin modules" >                                        
@@ -11,7 +10,7 @@
                   <th>Description</th>  
                   <th>File name</th>  
                   <th>Image</th>                    
-                  <th>Delete</th>  
+                  <th>Actions</th>  
               </tr>
             </thead>      
 
@@ -32,32 +31,31 @@
                             </td> 
                             <td>  
                                 <a href="{{assetimagepath}}"
-                                           target="_blank"
-                                           style ="width:150px;" > 
+                                           target="_blank"> 
                                     {{doc.description}}
                                 </a>                           
 
                             </td>    
-                            <td>  
-                                <div class="col-md-12" style="width:460px;padding:0px">  
-                                    <span class="col-md-6">
+                            <td>    
+                                <span >
                                     {{doc.name}}.{{doc.extension}}
-                                    </span>
-                                    <span class="col-md-6" style="padding:5px">
+                                </span>
+                            </td>
+                            <td>  
+                                <div class="" >  
+
+                                    <span >
                                           <img src="{{assetthumbimagepath}}"/>
                                     </span>
                                 </div>  
                             </td>
-                            
-                                                        
-                                               
+                                                                                                                                
                                 {#{{ include('@Lillydoo/addressbook/updateform.html.twig') }}  #}                                 
-
-                                                      
+                                                    
                             <td>                  
                                 <a href="{{ path('addressbook_deletedocument',{'did':doc.id, 'id':entity.id}) }}" 
                                     class="btn btn-md btn-danger btn-flat"
-                                    style ="width:150px;"                                                            
+                                    style ="width:100px;"                                                            
                                 >                                                       
                                    Delete
                                 </a> 

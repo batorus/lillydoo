@@ -11,15 +11,11 @@
                         
         {{ include('@Lillydoo/addressbook/form.html.twig') }} 
         
-        <input type="submit" value="Create" />
+        <input type="submit" value="Save" class="btn btn-warning btn-flat" style="width:100px; margin:5px 5px;"/>
+        <a href="{{ path('addressbook') }}" class="btn btn-primary btn-flat" style="width:100px; margin:5px 5px;">Cancel</a>
         
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('addressbook') }}">Back to the list</a>
-        </li>
-    </ul>
         
     {% block javascripts %}
     {{parent()}}
