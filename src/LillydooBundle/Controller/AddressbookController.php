@@ -211,9 +211,10 @@ class AddressbookController extends Controller
         
         $form = $this->createForm(AddressbookType::class, $entity);
         
-        $uploadForm = $this->createForm( DocumentsType::class, new Documents());      
-        $uploadForm->handleRequest($request);
+        $uploadForm = $this->createForm( DocumentsType::class, new Documents());   
         
+        // call handleRequest upon $uploadForm because the upload is being processed
+        $uploadForm->handleRequest($request);        
         $validator = $this->get('validator');
         $errors = $validator->validate($uploadForm);  
            
@@ -254,8 +255,7 @@ class AddressbookController extends Controller
     
     
     public function updateAction(Request $request, int $id): Response
-    {
-     
+    {    
         $em = $this->getDoctrine()->getManager();
        
         $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
@@ -281,7 +281,8 @@ class AddressbookController extends Controller
         }
                
         $form = $this->createForm(AddressbookType::class, $entity);
-              
+ 
+        // call handleRequest upon $form because the form is being processed
         $form->handleRequest($request);
         $validator = $this->get('validator');
         $errors = $validator->validate($form);    
