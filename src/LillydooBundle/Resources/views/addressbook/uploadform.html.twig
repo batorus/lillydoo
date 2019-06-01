@@ -18,19 +18,21 @@
                  </span>
             </span> 
 
-            <span class="col-md-3 ">
-{#                    <span class="pull-right">#}
+            <span class="col-md-2">
+
                  {{ form_widget(uploadForm.description,{'attr': {'id':'description', 'class': 'form-control', 'style' : 'height:40px;'}}) }}    
-{#                    </span>#}
+
             </span> 
 
-            <span class="col-md-4" style="height:40px;border: 1px solid black;padding:0px;">                      
-                {% if uploadForm.description.vars.errors|length > 0 %}       
+                   
+            {% if uploadForm.description.vars.errors|length > 0 %}       
+                <span class="col-md-2" >   
                     {% for error in uploadForm.description.vars.errors %}
                        <div style="color:red; font-size:16px;">{{ error.message }}</div>
-                    {% endfor %}        
-                {% endif %} 
-            </span>   
+                    {% endfor %}  
+                </span>  
+            {% endif %} 
+ 
 
         </div> 
         <div class='col-md-12' style="margin:10px 0px 10px 0px;"></div>                       
@@ -54,21 +56,23 @@
                  {{ form_widget(uploadForm.userfile,{'attr': {'id':'userfile', 'style' : 'height:40px;border: 0px solid black;'}}) }}    
 {#                    </span>#}
             </span> 
-            <span class="col-md-4 pull-left" style="height:40px;border: 1px solid black;padding:0px;" >    
+ 
 
-               {% if uploadForm.userfile.vars.errors|length > 0 %}       
-                    {% for error in uploadForm.userfile.vars.errors %}
-                       <div style="color:red; font-size:16px;">{{ error.message }}</div>
-                    {% endfor %}        
-                {% endif %} 
-            </span>                      
+            {% if uploadForm.userfile.vars.errors|length > 0 %}    
+                 <span class="col-md-3 pull-left" >   
+                     {% for error in uploadForm.userfile.vars.errors %}
+                        <div style="color:red; font-size:16px;">{{ error.message }}</div>
+                     {% endfor %}    
+                 </span>    
+             {% endif %} 
+                  
         </div> 
         <div class='col-md-12' style="margin:10px 0px 10px 0px;"></div>              
 
 
         <span class="col-md-2" style="padding-bottom:10px">
            <span class="pull-left">
-            {{ form_widget(uploadForm.upload,{'attr': {'class':'btn btn-md btn-default btn-flat', 'style' : 'width:170px;margin:0 auto;display: block;'}}) }}
+            {{ form_widget(uploadForm.upload,{'attr': {'class':'btn btn-md btn-primary btn-flat', 'style' : 'width:200px;margin-left:30px;display: block;'}}) }}
            </span>
        </span>                
     </div> 
