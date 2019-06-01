@@ -100,8 +100,7 @@ class AddressbookController extends Controller
           
         $form = $this->createForm(AddressbookType::class, $entity);
         
-        $form->handleRequest($request);
-        
+        $form->handleRequest($request);       
         $validator = $this->get('validator');
         $errors = $validator->validate($form);    
                 
@@ -150,14 +149,11 @@ class AddressbookController extends Controller
 
     
     /**
-     * Displays a form to edit an existing medicament entity.
+     * Displays a form to edit an existing addressbok entity.
      *
      */
     public function editAction(Addressbook $addressbook): Response
-    {
-        $editForm = $this->createForm(AddressbookType::class, $addressbook);
-        
-        $uploadForm = $this->createForm(DocumentsType::class, new Documents());              
+    {          
         $documents = $addressbook->getDocuments();
         
         if (!$documents) {
@@ -173,9 +169,12 @@ class AddressbookController extends Controller
             }
         }            
  
+        $form = $this->createForm(AddressbookType::class, $addressbook);       
+        $uploadForm = $this->createForm(DocumentsType::class, new Documents());  
+        
         return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
             'entity' => $addressbook,
-            'form' => $editForm->createView(),
+            'form' => $form->createView(),
             'documents'=>$docs,
             "uploadForm" =>$uploadForm->createView(),
             'updateForm'=>$updateForm,
@@ -183,8 +182,7 @@ class AddressbookController extends Controller
     }
     
     public function uploadAction(Request $request, int $id): Response
-    { 
-           
+    {           
         $em = $this->getDoctrine()->getManager();
        
         $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
@@ -207,10 +205,8 @@ class AddressbookController extends Controller
                 $updateForm[] = $this->createForm(DocumentsType::class, $document)->createView();               
             }
         }
-
-        
-        $form = $this->createForm(AddressbookType::class, $entity);
-        
+       
+        $form = $this->createForm(AddressbookType::class, $entity);       
         $uploadForm = $this->createForm( DocumentsType::class, new Documents());   
         
         // call handleRequest upon $uploadForm because the upload is being processed
@@ -264,7 +260,7 @@ class AddressbookController extends Controller
             throw $this->createNotFoundException('Unable to find Addressbook entity.');
         }
         
-        $uploadForm = $this->createForm(DocumentsType::class, new Documents());              
+           
         $documents = $entity->getDocuments();
         
         if (!$documents) {
@@ -281,7 +277,8 @@ class AddressbookController extends Controller
         }
                
         $form = $this->createForm(AddressbookType::class, $entity);
- 
+        $uploadForm = $this->createForm(DocumentsType::class, new Documents());   
+        
         // call handleRequest upon $form because the form is being processed
         $form->handleRequest($request);
         $validator = $this->get('validator');
@@ -296,8 +293,7 @@ class AddressbookController extends Controller
                                 'uploadForm'=>$uploadForm->createView(),       
                                 'updateForm'=>$updateForm,                   
                                 'errors' => $errors
-            ));
-            
+            ));           
         }
         
         $em = $this->getDoctrine()->getManager();
