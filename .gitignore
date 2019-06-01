@@ -14,8 +14,8 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
-/web/bundles/lillydoo/images/originals/
-/web/bundles/lillydoo/images/thumbs/
+/web/bundles/lillydoo/images/originals/*
+/web/bundles/lillydoo/images/thumbs/*
 !/web/bundles/lillydoo/images/originals/.gitkeep
 !/web/bundles/lillydoo/images/thumbs/.gitkeep
 /app/DoctrineMigrations/
