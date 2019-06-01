@@ -191,7 +191,6 @@ class AddressbookController extends Controller
             throw $this->createNotFoundException('Unable to find entity.');
         }
       
-        //$documents = $em->getRepository('AnomaliesBundle:Documents')->getRecords($id);
         $documents = $entity->getDocuments();
         if (!$documents) {
             throw $this->createNotFoundException('Unable to find Documents entity.');
@@ -255,14 +254,11 @@ class AddressbookController extends Controller
         $em = $this->getDoctrine()->getManager();
        
         $entity = $em->getRepository('LillydooBundle:Addressbook')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Addressbook entity.');
         }
-        
-           
-        $documents = $entity->getDocuments();
-        
+                  
+        $documents = $entity->getDocuments();        
         if (!$documents) {
             throw $this->createNotFoundException('Unable to find Documents entity.');
         }
@@ -295,21 +291,16 @@ class AddressbookController extends Controller
                                 'errors' => $errors
             ));           
         }
-        
-        $em = $this->getDoctrine()->getManager();
+
         $entity->setFirstname($request->request->get('lillydoobundle_addressbook')['firstname']);   
         $entity->setLastname($request->request->get('lillydoobundle_addressbook')['lastname']);
         $entity->setStreet($request->request->get('lillydoobundle_addressbook')['street']);
-        $entity->setNumber($request->request->get('lillydoobundle_addressbook')['number']);   
-        
-        $entity->setBirthday(new \DateTime($request->request->get('lillydoobundle_addressbook')['birthday']));
-        
+        $entity->setNumber($request->request->get('lillydoobundle_addressbook')['number']);          
+        $entity->setBirthday(new \DateTime($request->request->get('lillydoobundle_addressbook')['birthday']));        
         $entity->setCountry($request->request->get('lillydoobundle_addressbook')['country']);   
-        $entity->setPhonenumber($request->request->get('lillydoobundle_addressbook')['phonenumber']);
-        
+        $entity->setPhonenumber($request->request->get('lillydoobundle_addressbook')['phonenumber']);        
         $entity->setEmail($request->request->get('lillydoobundle_addressbook')['email']);
         $entity->setZipcode($request->request->get('lillydoobundle_addressbook')['zipcode']); 
-
         $entity->setEnabled(1);
 
         try{     
@@ -330,7 +321,7 @@ class AddressbookController extends Controller
     }
 
     /**
-     * Deletes a addressbook entity.
+     * Deletes an addressbook entity.
      *
      */
     public function deleteAction(Request $request, int $id): Response
@@ -366,7 +357,7 @@ class AddressbookController extends Controller
         
         return $this->redirect($this->generateUrl('addressbook'));
     }
-    ###############################################
+
 
 
     /**
