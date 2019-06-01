@@ -236,12 +236,14 @@ class AddressbookController extends Controller
             echo $e->getTrace(); die();
         }
         return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
-    }  
+    } 
+    
     
     public function updatedocumentAction(Request $request, int $did, int $id)
     {   
         die("update document");
     }
+    
     
     public function deletedocumentAction(Request $request, int $did, int $id): Response
     { 
@@ -249,6 +251,7 @@ class AddressbookController extends Controller
         $this->get('application.file_uploader')->deletedocumentAction($did);
         return $this->redirectToRoute('addressbook_edit',array('id'=>$id));
     }
+    
     
     public function updateAction(Request $request, int $id): Response
     {
@@ -259,6 +262,22 @@ class AddressbookController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Addressbook entity.');
+        }
+        
+        $uploadForm = $this->createForm(DocumentsType::class, new Documents());              
+        $documents = $entity->getDocuments();
+        
+        if (!$documents) {
+            throw $this->createNotFoundException('Unable to find Documents entity.');
+        }
+        
+        $docs = array();
+        $updateForm = array();       
+        foreach($documents as $document){
+            if($document->getEnabled() == 1){
+                $docs[] = $document;
+                $updateForm[] = $this->createForm(DocumentsType::class, $document)->createView();               
+            }
         }
                
         $form = $this->createForm(AddressbookType::class, $entity);
@@ -271,7 +290,10 @@ class AddressbookController extends Controller
         {                     
             return $this->render('@Lillydoo/addressbook/edit.html.twig', array(
                                 'entity' => $entity,
+                                'documents'=>$docs,                 
                                 'form'   => $form->createView(),
+                                'uploadForm'=>$uploadForm->createView(),       
+                                'updateForm'=>$updateForm,                   
                                 'errors' => $errors
             ));
             
