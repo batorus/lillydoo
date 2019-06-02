@@ -25,7 +25,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for first name should not be blank!',
                                                                             )        
                                                                     )
                                                             ),

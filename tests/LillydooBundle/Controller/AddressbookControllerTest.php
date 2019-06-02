@@ -52,4 +52,97 @@ class AddressbookControllerTest extends WebTestCase
     }
 
     */
+    
+    
+    public function test_when_click_addnewrecord_redirects_to_addressbook_new(){
+        
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/addressbook/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /addressbook/");
+        $crawler = $client->click($crawler->selectLink('Add New Record')->link());
+
+        $this->assertContains('Addressbook creation', $client->getResponse()->getContent());
+        
+        //this is more specific
+        $this->assertContains('Addressbook creation', $crawler->filter('main h1')->text());
+        
+    }
+    
+    public function test_when_click_save_new_record_validation_messages_appear(){
+        
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/addressbook/new');
+//        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /addressbook/");
+//        $crawler = $client->click($crawler->selectLink('Add New Record')->link());
+        
+        //test element exists
+        $this->assertEquals("lillydoobundle_addressbook[firstname]",  
+                            $crawler->filter('body form table tbody')
+                                    ->children()
+                                    ->eq(0)->children()
+                                           ->eq(1)
+                                              ->children()
+                                              ->eq(0)
+                                              ->attr("name"));
+        
+         $form = $crawler->selectButton('Save')->form(array(
+            'lillydoobundle_addressbook[firstname]'  => ""
+        ));
+         
+        $uri = $client->submit($form)->getUri();
+        $this->assertContains('The value for first name should not be blank!', $client->getResponse()->getContent());
+        
+       // var_dump($uri);die();
+       // $crawler = $client->followRedirect();
+        
+//        $crawler = $crawler->filter("tbody > tr");
+//        $nodeValues = $crawler->each(
+//                function ($node, $i) {
+//                        $first = $node->children()->first()->text();
+//                        $last = $node->children()->eq(2)->html();
+//                        return array($first, $last);
+//                }
+//        );
+
+       //$this->assertRegExp('/foo(bar)?/', $client->getResponse()->getContent());
+//       $this->assertTrue(
+//            $client->getResponse()->isRedirect()
+//            // if the redirection URL was generated as an absolute URL
+//            // $client->getResponse()->isRedirect('http://localhost/demo/contact')
+//        );
+      //print_r($client->getResponse()->headers->keys()); die();
+//        $this->assertEquals("This value should not be blank!",  
+//                            $crawler->filter('body form table tbody')
+//                                    ->children()
+//                                    ->eq(0)->children()
+//                                           ->eq(2)
+//                                              ->children()
+//                                              ->eq(0)->html()
+//                                              );
+        
+       // var_dump($client->getResponse()->getContent());die();
+//                            $crawler->filter('body form table tbody')
+//                                    ->children()
+//                                    ->eq(0)
+//        $this->assertContains('This value should not be blank!', $client->getResponse()->getContent());
+//        $this->assertContains('This value should not be blank!', 
+//                                           $crawler->filter('body form table tbody')
+//                                         
+//                                           );        
+//        var_dump(    $crawler->filter('body form table tbody')
+//                                      ->children()
+//                                      ->eq(0)->children()
+//                                           ->eq(2)
+////                                              ->children()
+////                                              ->eq(0)
+//                                            ->html());die();
+                                                
+//        $this->assertContains('This value should not be blank!', 
+//                              $crawler->filter('body')
+//                                      ->children()
+//                                      ->eq(1)->children()
+//                                             ->eq(3)
+//                                             ->text());
+        
+    }
 }
