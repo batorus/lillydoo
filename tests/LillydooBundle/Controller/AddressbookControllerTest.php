@@ -6,54 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AddressbookControllerTest extends WebTestCase
 {
-    /*
-    public function testCompleteScenario()
-    {
-        // Create a new client to browse the application
-        $client = static::createClient();
-
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/addressbook/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /addressbook/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
-
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'lillydoobundle_addressbook[field_name]'  => 'Test',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
-
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
-
-        $form = $crawler->selectButton('Update')->form(array(
-            'lillydoobundle_addressbook[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
-    }
-
-    */
-    
-    
+   
     public function test_when_click_add_new_record_redirects_to_addressbook_new(){
         
         $client = static::createClient();
@@ -133,82 +86,82 @@ class AddressbookControllerTest extends WebTestCase
             ['.com'],
         ];
    }
-   
-    public function test_click_save_new_record_with_valid_data_creates_new_record_in_db()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/addressbook/new');
-       
-        $form = $crawler->selectButton('Save')->form(array(
-           'lillydoobundle_addressbook[firstname]'  => "AAA",
-           'lillydoobundle_addressbook[lastname]'  => "Bar",        
-           'lillydoobundle_addressbook[street]'  => "12345 street",
-           'lillydoobundle_addressbook[number]'  => "1234",
-           'lillydoobundle_addressbook[country]'  => "Romania",
-           'lillydoobundle_addressbook[phonenumber]'  => "123456789",        
-           'lillydoobundle_addressbook[birthday]'  => "2019-06-05",
-           'lillydoobundle_addressbook[email]'  => "email@test.com",     
-           'lillydoobundle_addressbook[zipcode]'  => "zipcodetest",            
-        ));
-         
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("AAA")')->count());   
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Bar")')->count());    
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("12345 street")')->count());   
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("1234")')->count()); 
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Romania")')->count());   
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("123456789")')->count());    
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("2019-06-05")')->count());   
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("email@test.com")')->count());     
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("zipcodetest")')->count());  
-
-    }
-    
-    public function test_edit_entity()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/addressbook/');
-
-        $link = $crawler
-                ->filter('a:contains("Edit")') // find all links with the text "Greet"
-                ->eq(0)
-                ->link()
-;
-        //$crawler->selectLink('Edit')->eq(0)->link()
-        $crawler = $client->click($link);
-        $this->assertContains('Addressbook edit', $client->getResponse()->getContent());
-
-        $form = $crawler->selectButton('Save')->form(array(
-           'lillydoobundle_addressbook[firstname]'  => "AAA",
-        ));
-        
-        //$this->assertGreaterThan(0, $crawler->filter('[value="Fooo"]')->count());
-        
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-        
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("AAA")')->count()); 
-    }
-    
-    public function test_delete_entity()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/addressbook/');
-        
-        $link = $crawler
-                ->filter('a:contains("Delete")') // find all links with the text "Greet"
-                ->eq(0)
-                ->link()
-;
-
-        $crawler = $client->click($link);
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/AAA/', $client->getResponse()->getContent());
-    }
+  
+#######################Tests that interact with the db   
+//    public function test_click_save_new_record_with_valid_data_creates_new_record_in_db()
+//    {
+//        $client = static::createClient();
+//        $crawler = $client->request('GET', '/addressbook/new');
+//       
+//        $form = $crawler->selectButton('Save')->form(array(
+//           'lillydoobundle_addressbook[firstname]'  => "AAA",
+//           'lillydoobundle_addressbook[lastname]'  => "Bar",        
+//           'lillydoobundle_addressbook[street]'  => "12345 street",
+//           'lillydoobundle_addressbook[number]'  => "1234",
+//           'lillydoobundle_addressbook[country]'  => "Romania",
+//           'lillydoobundle_addressbook[phonenumber]'  => "123456789",        
+//           'lillydoobundle_addressbook[birthday]'  => "2019-06-05",
+//           'lillydoobundle_addressbook[email]'  => "email@test.com",     
+//           'lillydoobundle_addressbook[zipcode]'  => "zipcodetest",            
+//        ));
+//         
+//        $client->submit($form);
+//        $crawler = $client->followRedirect();
+//
+//        // Check data in the show view
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("AAA")')->count());   
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("Bar")')->count());    
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("12345 street")')->count());   
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("1234")')->count()); 
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("Romania")')->count());   
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("123456789")')->count());    
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("2019-06-05")')->count());   
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("email@test.com")')->count());     
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("zipcodetest")')->count());  
+//
+//    }
+//    
+//    public function test_edit_entity()
+//    {
+//        $client = static::createClient();
+//        $crawler = $client->request('GET', '/addressbook/');
+//
+//        $link = $crawler
+//                ->filter('a:contains("Edit")') // find all links with the text "Greet"
+//                ->eq(0)
+//                ->link()
+//;
+//        //$crawler->selectLink('Edit')->eq(0)->link()
+//        $crawler = $client->click($link);
+//        $this->assertContains('Addressbook edit', $client->getResponse()->getContent());
+//
+//        $form = $crawler->selectButton('Save')->form(array(
+//           'lillydoobundle_addressbook[firstname]'  => "AAA",
+//        ));
+//        
+//        //$this->assertGreaterThan(0, $crawler->filter('[value="Fooo"]')->count());
+//        
+//        $client->submit($form);
+//        $crawler = $client->followRedirect();
+//        
+//        $this->assertGreaterThan(0, $crawler->filter('td:contains("AAA")')->count()); 
+//    }
+//    
+//    public function test_delete_entity()
+//    {
+//        $client = static::createClient();
+//        $crawler = $client->request('GET', '/addressbook/');
+//        
+//        $link = $crawler
+//                ->filter('a:contains("Delete")') // find all links with the text "Greet"
+//                ->eq(0)
+//                ->link();
+//
+//        $crawler = $client->click($link);
+//        $crawler = $client->followRedirect();
+//
+//        // Check the entity has been delete on the list
+//        $this->assertNotRegExp('/AAA/', $client->getResponse()->getContent());
+//    }
       
 }
