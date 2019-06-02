@@ -40,7 +40,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for last name should not be blank!',
                                                                             )        
                                                                     )
                                                             ),
@@ -55,7 +55,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for street should not be blank!',
                                                                             )        
                                                                     )
                                                             ),
@@ -70,12 +70,12 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for street number should not be blank!',
                                                                             )        
                                                                     )
                                                                     ,new Assert\Type([
                                                                                'type' => 'numeric',
-                                                                               'message' => 'The value should be a number!.',
+                                                                               'message' => 'The value for street number should be a number!.',
                                                                            ])                                           
                                                             ),
                                         'attr' => array(
@@ -100,7 +100,7 @@ class AddressbookType extends AbstractType
                                                 'constraints'=>array(
                                                                     new Assert\NotNull(
                                                                               array(
-                                                                                    'message' => 'Choose a valid option!',
+                                                                                    'message' => 'Choose a valid option for country!',
                                                                                     ) 
                                                                     ),
                                                     )
@@ -113,7 +113,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for phone number should not be blank!',
                                                                             )        
                                                                     )
                                                             ),
@@ -131,7 +131,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for birthday should not be blank!',
                                                                             )        
                                                                     )
                                                             )
@@ -143,7 +143,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                             new Assert\NotBlank(
                                                                     array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for email should not be blank!',
                                                                         )        
                                                                     )
                                                             ,new Assert\Email(
@@ -163,7 +163,7 @@ class AddressbookType extends AbstractType
                                         'constraints'=>array( 
                                                               new Assert\NotBlank(
                                                                       array(
-                                                                            'message' => 'This value should not be blank!',
+                                                                            'message' => 'The value for zip code should not be blank!',
                                                                             )        
                                                                     )
                                                             ),
