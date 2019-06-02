@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use  Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class AddressbookType extends AbstractType
@@ -62,7 +63,7 @@ class AddressbookType extends AbstractType
                                                         //'style' => 'width:250px', 
                                                         )                                   
                                     ))
-                ->add('number', TextType::class,
+                ->add('number', NumberType::class,
                                 array(
                                         'data' => $options['data']->getNumber(),
                                         'label' => "Street number",
@@ -72,6 +73,10 @@ class AddressbookType extends AbstractType
                                                                             'message' => 'This value should not be blank!',
                                                                             )        
                                                                     )
+                                                                    ,new Assert\Type([
+                                                                               'type' => 'numeric',
+                                                                               'message' => 'The value should be a number!.',
+                                                                           ])                                           
                                                             ),
                                         'attr' => array(
                                                         //'style' => 'width:250px', 
@@ -136,11 +141,16 @@ class AddressbookType extends AbstractType
                                         'data' => $options['data']->getEmail(),
                                         'label' => "Email",
                                         'constraints'=>array( 
-                                                              new Assert\NotBlank(
-                                                                      array(
+                                                            new Assert\NotBlank(
+                                                                    array(
                                                                             'message' => 'This value should not be blank!',
-                                                                            )        
+                                                                        )        
                                                                     )
+                                                            ,new Assert\Email(
+                                                                    array(
+                                                                             'message' => 'Not a valid email address!',
+                                                                          ) 
+                                                                    ) 
                                                             ),
                                         'attr' => array(
                                                         //'style' => 'width:250px', 
