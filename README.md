@@ -1,4 +1,4 @@
-Application instalation steps
+Application instalation steps:
 =============================
 1. clone this repository
 2. check to see if the next directories were created: 
@@ -6,7 +6,7 @@ Application instalation steps
    - web/bundles/lillydoo/images/originals/
    - web/bundles/lillydoo/images/thumbs/
 
-If they weren't generated (this is a known issue), they have to be be manually created.
+   If they weren't generated (this is a known issue), they have to be be manually created.
 
 3. run "composer install" in the root of the application, in order for the dependencies to be installed
 4. when asked for database credentials and other parameters, the application works fine with the default values.
