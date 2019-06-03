@@ -20,7 +20,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 
-/web/bundles/*
 /web/bundles/lillydoo/images/originals/*
 /web/bundles/lillydoo/images/thumbs/*
 !/web/bundles/lillydoo/images/originals/.gitkeep
